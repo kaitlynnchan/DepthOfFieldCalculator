@@ -39,9 +39,9 @@
         app:layout_constraintGuide_end="98dp" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/floatingActionButton2"
-        android:layout_width="71dp"
-        android:layout_height="69dp"
+        android:id="@+id/addButton"
+        android:layout_width="61dp"
+        android:layout_height="58dp"
         android:clickable="true"
         android:src="@drawable/ic_add_white_24dp"
         app:backgroundTint="#E91E63"
