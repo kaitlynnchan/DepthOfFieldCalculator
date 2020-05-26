@@ -31,6 +31,6 @@ public class Lens {
     public String toString() {
         return make
                 + " F" + maxAperture
-                + " " + focalLength + "m";
+                + " " + focalLength + "mm";
     }
 }

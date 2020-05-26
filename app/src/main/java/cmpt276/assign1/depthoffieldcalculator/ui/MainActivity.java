@@ -33,14 +33,17 @@ public class MainActivity extends AppCompatActivity {
         manager.add(new Lens("Nikkor", 2.8, 24));
         manager.add(new Lens("Sony", 1.8, 35));
         manager.add(new Lens("Canon", 3.5, 80));
-//        String[] items = {"Test", "Test2"};
-        //items[0] = manager.getLens(0).toString();
+        String[] items = new String[manager.getSize()];
+        for(int i = 0; i < manager.getSize(); i++){
+            items[i] = manager.getLens(i).toString();
+        }
+//        items[0] = manager.getLens(0).toString();
 //        Lens lens = manager.getLens(0);
 
-        ArrayAdapter<LensManager> adapter = new ArrayAdapter<LensManager>(
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(
                 this,
                 R.layout.lens_item,
-                Collections.singletonList(manager));
+                items); //Collections.singletonList(manager.)
 
         ListView list = (ListView) findViewById(R.id.listViewLens);
         list.setAdapter(adapter);
