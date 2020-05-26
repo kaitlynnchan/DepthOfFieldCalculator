@@ -2,6 +2,7 @@ package cmpt276.assign1.depthoffieldcalculator.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -30,8 +31,10 @@ public class MainActivity extends AppCompatActivity {
         populateLensManager();
 
         FloatingActionButton add = findViewById(R.id.addButton);
-        add.setOnClickListener(view -> {}
-            );
+        add.setOnClickListener(view -> {
+            Intent i = AddLensActivity.makeLaunchIntent(MainActivity.this); //, "hi"
+            startActivity(i);
+        });
     }
 
     private void populateLensManager(){
