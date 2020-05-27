@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -63,9 +64,8 @@ public class MainActivity extends AppCompatActivity {
                 manager.add(new Lens(make, aperture, focalLength));
                 populateListView();
 
-                // Temporary, replace with update to list view
-                String message = "Added lens: " + make + " " + focalLength + "mm F" + aperture;
-                Toast.makeText(MainActivity.this, message, Toast.LENGTH_LONG).show();
+                // Temporary, replace with snackbar
+                Toast.makeText(MainActivity.this, "added new lens", Toast.LENGTH_LONG).show();
 
                 break;
         }
@@ -103,10 +103,10 @@ public class MainActivity extends AppCompatActivity {
             makeText.setText(currentLens.getMake());
 
             TextView focalLengthText = (TextView) itemView.findViewById(R.id.item_textViewFocalLength);
-            focalLengthText.setText("" + currentLens.getFocalLength());
+            focalLengthText.setText(currentLens.getFocalLength() + "mm");
 
             TextView apertureText = (TextView) itemView.findViewById(R.id.item_textViewAperture);
-            apertureText.setText("" + currentLens.getMaxAperture());
+            apertureText.setText("F" + currentLens.getMaxAperture());
 
             return itemView;
         }
