@@ -57,11 +57,14 @@ public class MainActivity extends AppCompatActivity {
             items[i] = manager.getLens(i).toString();
         }
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, R.layout.lens_item, items); //Collections.singletonList(manager.)
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(
+                this, R.layout.lens_item, items //Collections.singletonList(manager.)
+        );
 
         ListView list = findViewById(R.id.listViewLens);
         list.setAdapter(adapter);
     }
+
 
     // Create updateUI()
 }

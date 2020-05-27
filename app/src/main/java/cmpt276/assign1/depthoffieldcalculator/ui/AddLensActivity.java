@@ -2,6 +2,7 @@ package cmpt276.assign1.depthoffieldcalculator.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -45,6 +46,7 @@ public class AddLensActivity extends AppCompatActivity {
                 intent.putExtra(EXTRA_USER_MAKE, userMake);
                 intent.putExtra(EXTRA_USER_FOCAL_lENGTH, userFocalLength);
                 intent.putExtra(EXTRA_USER_APERTURE, userAperture);
+                setResult(Activity.RESULT_OK, intent);
                 finish();
             }
         });
@@ -55,6 +57,8 @@ public class AddLensActivity extends AppCompatActivity {
         btnCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Intent intent = new Intent();
+                setResult(Activity.RESULT_CANCELED, intent);
                 finish();
             }
         });
