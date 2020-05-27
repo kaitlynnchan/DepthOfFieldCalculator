@@ -9,6 +9,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.google.android.material.snackbar.Snackbar;
+
 import cmpt276.assign1.depthoffieldcalculator.R;
 
 public class AddLensActivity extends AppCompatActivity {
@@ -47,6 +49,7 @@ public class AddLensActivity extends AppCompatActivity {
                 intent.putExtra(EXTRA_USER_FOCAL_lENGTH, userFocalLength);
                 intent.putExtra(EXTRA_USER_APERTURE, userAperture);
                 setResult(Activity.RESULT_OK, intent);
+
                 finish();
             }
         });

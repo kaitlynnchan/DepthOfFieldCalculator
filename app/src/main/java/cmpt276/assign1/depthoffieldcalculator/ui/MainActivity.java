@@ -10,12 +10,14 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.util.Collections;
 
@@ -37,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
 
         populateLensManager();
         populateListView();
+        registerClickCallback();
 
         FloatingActionButton add = findViewById(R.id.addButton);
         add.setOnClickListener(view -> {
@@ -57,15 +60,20 @@ public class MainActivity extends AppCompatActivity {
 
         switch (requestCode){
             case RESULT_CODE_ADD_LENS:
+
+                // Unneeded
+                Snackbar.make(findViewById(R.id.myMainActivity),
+                        "Added new lens",
+                        Snackbar.LENGTH_LONG)
+                        .setAction("Action", null)
+                        .show();
+
                 String make = data.getStringExtra(AddLensActivity.EXTRA_USER_MAKE);
                 int focalLength = data.getIntExtra(AddLensActivity.EXTRA_USER_FOCAL_lENGTH, 0);
                 double aperture = data.getDoubleExtra(AddLensActivity.EXTRA_USER_APERTURE, 0);
 
                 manager.add(new Lens(make, aperture, focalLength));
                 populateListView();
-
-                // Temporary, replace with snackbar
-                Toast.makeText(MainActivity.this, "added new lens", Toast.LENGTH_LONG).show();
 
                 break;
         }
@@ -110,6 +118,18 @@ public class MainActivity extends AppCompatActivity {
 
             return itemView;
         }
+    }
+
+
+    private void registerClickCallback() {
+        ListView list = (ListView) findViewById(R.id.listViewLens);
+        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(MainActivity.this, CalculateDepthOfFieldActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     // Create updateUI()
