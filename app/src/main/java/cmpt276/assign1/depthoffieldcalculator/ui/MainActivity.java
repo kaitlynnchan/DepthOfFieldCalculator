@@ -1,17 +1,22 @@
 package cmpt276.assign1.depthoffieldcalculator.ui;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
+
+import java.util.Collections;
 
 import cmpt276.assign1.depthoffieldcalculator.R;
 import cmpt276.assign1.depthoffieldcalculator.model.Lens;
@@ -20,13 +25,17 @@ import cmpt276.assign1.depthoffieldcalculator.model.LensManager;
 public class MainActivity extends AppCompatActivity {
 
     public static final int RESULT_CODE_ADD_LENS = 42;
+    private LensManager manager;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        populateLensList();
+        manager = LensManager.getInstance();
+
+        populateLensManager();
+        populateListView();
 
         FloatingActionButton add = findViewById(R.id.addButton);
         add.setOnClickListener(view -> {
@@ -36,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data){
         super.onActivityResult(requestCode, resultCode, data);
 
         if(resultCode == Activity.RESULT_CANCELED){
@@ -50,33 +59,58 @@ public class MainActivity extends AppCompatActivity {
                 String make = data.getStringExtra(AddLensActivity.EXTRA_USER_MAKE);
                 int focalLength = data.getIntExtra(AddLensActivity.EXTRA_USER_FOCAL_lENGTH, 0);
                 double aperture = data.getDoubleExtra(AddLensActivity.EXTRA_USER_APERTURE, 0);
+
+                manager.add(new Lens(make, aperture, focalLength));
+                populateListView();
+
+                // Temporary, replace with update to list view
                 String message = "Added lens: " + make + " " + focalLength + "mm F" + aperture;
-//                Snackbar.make(MainActivity.this, message, Snackbar.LENGTH_LONG);
                 Toast.makeText(MainActivity.this, message, Toast.LENGTH_LONG).show();
+
                 break;
         }
 
     }
 
-    private void populateLensList(){
-        LensManager manager = LensManager.getInstance();
+    private void populateLensManager(){
         manager.add(new Lens("Nikkor", 2.8, 24));
         manager.add(new Lens("Sony", 1.8, 35));
         manager.add(new Lens("Canon", 3.5, 80));
+    }
 
-        String[] items = new String[manager.getSize()];
-        for(int i = 0; i < manager.getSize(); i++){
-            items[i] = manager.getLens(i).toString();
-        }
-
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(
-                this, R.layout.lens_item, items //Collections.singletonList(manager.)
-        );
-
-        ListView list = findViewById(R.id.listViewLens);
+    private void populateListView(){
+        ArrayAdapter<LensManager> adapter = new MyListAdapter();
+        ListView list = (ListView) findViewById(R.id.listViewLens);
         list.setAdapter(adapter);
     }
 
+    private class MyListAdapter extends ArrayAdapter<LensManager> {
+        public MyListAdapter() {
+            super(MainActivity.this, R.layout.item_view_lens, Collections.singletonList(manager));
+        }
+
+        @NonNull
+        @Override
+        public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+            View itemView = convertView;
+            if(itemView == null){
+                itemView = getLayoutInflater().inflate(R.layout.item_view_lens, parent, false);
+            }
+
+            Lens currentLens = manager.getLens(position);
+
+            TextView makeText = (TextView) itemView.findViewById(R.id.item_textViewMake);
+            makeText.setText(currentLens.getMake());
+
+            TextView focalLengthText = (TextView) itemView.findViewById(R.id.item_textViewFocalLength);
+            focalLengthText.setText("" + currentLens.getFocalLength());
+
+            TextView apertureText = (TextView) itemView.findViewById(R.id.item_textViewAperture);
+            apertureText.setText("" + currentLens.getMaxAperture());
+
+            return itemView;
+        }
+    }
 
     // Create updateUI()
 }
