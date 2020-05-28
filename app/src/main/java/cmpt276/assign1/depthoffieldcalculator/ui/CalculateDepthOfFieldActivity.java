@@ -62,7 +62,8 @@ public class CalculateDepthOfFieldActivity extends AppCompatActivity {
                 String userApertureData = userApertureEntry.getText().toString();
                 double userAperture = Double.parseDouble(userApertureData);
 
-                calculateDepthOfField(userCOC, userDistance, userAperture);
+                // Multiply userDistance by 1000 to convert units from m to mm
+                calculateDepthOfField(userCOC, userDistance * 1000, userAperture);
             }
         });
     }
@@ -82,10 +83,18 @@ public class CalculateDepthOfFieldActivity extends AppCompatActivity {
             DepthOfFieldCalculator doFCalculator = new DepthOfFieldCalculator(
                     lens, userAperture, userDistance, userCOC
             );
-            nearFocalDistance.setText(doFCalculator.nearFocalPoint() + "m");
-            farFocalDistance.setText(doFCalculator.farFocalPoint() + "m");
-            depthOfField.setText(doFCalculator.depthOfField() + "m");
-            hyperFocalDistance.setText(doFCalculator.hyperFocalDistance() + "m");
+
+            // Divide distances by 1000 to convert units from mm to m
+            nearFocalDistance.setText(doFCalculator.nearFocalPoint() / 1000 + "m");
+            hyperFocalDistance.setText(doFCalculator.hyperFocalDistance() / 1000 + "m");
+
+            if(doFCalculator.farFocalPoint() == Double.POSITIVE_INFINITY){
+                farFocalDistance.setText("Infinitym");
+                depthOfField.setText("Infinitym");
+            } else{
+                farFocalDistance.setText(doFCalculator.farFocalPoint() / 1000 + "m");
+                depthOfField.setText(doFCalculator.depthOfField() / 1000 + "m");
+            }
         }
     }
 }
