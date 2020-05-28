@@ -21,6 +21,9 @@ import cmpt276.assign1.depthoffieldcalculator.model.LensManager;
 public class CalculateDepthOfFieldActivity extends AppCompatActivity {
 
     public static final int RESULT_CODE_EDIT_LENS = 42;
+    public static final String EXTRA_LENS_MAKE = "lens make";
+    public static final String EXTRA_LENS_FOCAL_LENGTH = "lens focal length";
+    public static final String EXTRA_LENS_APERTURE = "lens aperture";
 
     private static final String EXTRA_LENS_INDEX = "extra lens index";
     private LensManager manager;
@@ -113,7 +116,9 @@ public class CalculateDepthOfFieldActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = AddLensActivity.makeLaunchIntent(
                         CalculateDepthOfFieldActivity.this, true);
-                intent.putExtra(EXTRA_LENS_INDEX, lensIndex);
+                intent.putExtra(EXTRA_LENS_MAKE, lens.getMake());
+                intent.putExtra(EXTRA_LENS_FOCAL_LENGTH, lens.getFocalLength());
+                intent.putExtra(EXTRA_LENS_APERTURE, lens.getMaxAperture());
                 startActivityForResult(intent, RESULT_CODE_EDIT_LENS);
             }
         });
@@ -145,6 +150,20 @@ public class CalculateDepthOfFieldActivity extends AppCompatActivity {
 
         switch (requestCode){
             case RESULT_CODE_EDIT_LENS:
+                String userMake = data.getStringExtra(AddLensActivity.EXTRA_USER_MAKE);
+                int userFocalLength = data.getIntExtra(AddLensActivity.EXTRA_USER_FOCAL_lENGTH, 0);
+                double userAperture = data.getDoubleExtra(AddLensActivity.EXTRA_USER_APERTURE, 0);
+
+                if(lens.getMake() != userMake){
+                    lens.setMake(userMake);
+                }
+                if(lens.getFocalLength() != userFocalLength){
+                    lens.setFocalLength(userFocalLength);
+                }
+                if(lens.getMaxAperture() != userAperture){
+                    lens.setMaxAperture(userAperture);
+                }
+
                 lensText.setText(lens.toString());
                 break;
         }

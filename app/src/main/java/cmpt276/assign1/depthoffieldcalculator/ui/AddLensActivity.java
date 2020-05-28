@@ -13,8 +13,6 @@ import android.widget.EditText;
 import com.google.android.material.snackbar.Snackbar;
 
 import cmpt276.assign1.depthoffieldcalculator.R;
-import cmpt276.assign1.depthoffieldcalculator.model.Lens;
-import cmpt276.assign1.depthoffieldcalculator.model.LensManager;
 
 public class AddLensActivity extends AppCompatActivity {
 
@@ -23,10 +21,7 @@ public class AddLensActivity extends AppCompatActivity {
     public static final String EXTRA_USER_APERTURE = "user aperture";
 
     private static final String EXTRA_EXISTED = "existed lens";
-    private static final String EXTRA_LENS_INDEX = "extra lens index";
-    private LensManager manager;
     private Boolean existed;
-    private Lens lens;
 
     public static Intent makeLaunchIntent(Context context, Boolean existed){
         Intent intent = new Intent(context, AddLensActivity.class);
@@ -42,26 +37,25 @@ public class AddLensActivity extends AppCompatActivity {
         Intent intent = getIntent();
         existed = intent.getBooleanExtra(EXTRA_EXISTED, false);
         if(existed){
-            int lensIndex = intent.getIntExtra(EXTRA_LENS_INDEX, 0);
-            setEditTexts(lensIndex);
+            String make = intent.getStringExtra(CalculateDepthOfFieldActivity.EXTRA_LENS_MAKE);
+            int focalLength = intent.getIntExtra(CalculateDepthOfFieldActivity.EXTRA_LENS_FOCAL_LENGTH, 0);
+            double aperture = intent.getDoubleExtra(CalculateDepthOfFieldActivity.EXTRA_LENS_APERTURE, 0);
+            setEditTexts(make, focalLength, aperture);
         }
 
         setupButtonSave();
         setupButtonCancel();
     }
 
-    private void setEditTexts(int lensIndex) {
-        manager = LensManager.getInstance();
-        lens = manager.getLens(lensIndex);
-
+    private void setEditTexts(String make, int focalLength, double aperture) {
         EditText userMakeEntry = (EditText) findViewById(R.id.editTextMake);
-        userMakeEntry.setText(lens.getMake());
+        userMakeEntry.setText(make);
 
         EditText userFocalLengthEntry = (EditText) findViewById(R.id.editTextFocalLength);
-        userFocalLengthEntry.setText("" + lens.getFocalLength());
+        userFocalLengthEntry.setText("" + focalLength);
 
         EditText userApertureEntry = (EditText) findViewById(R.id.editTextAperture);
-        userApertureEntry.setText("" + lens.getMaxAperture());
+        userApertureEntry.setText("" + aperture);
     }
 
     private void setupButtonSave() {
@@ -81,22 +75,9 @@ public class AddLensActivity extends AppCompatActivity {
                 double userAperture = Double.parseDouble(userApertureData);
 
                 Intent intent = new Intent();
-
-                if(existed){
-                    if(lens.getMake() != userMake){
-                        lens.setMake(userMake);
-                    }
-                    if(lens.getFocalLength() != userFocalLength){
-                        lens.setFocalLength(userFocalLength);
-                    }
-                    if(lens.getMaxAperture() != userAperture){
-                        lens.setMaxAperture(userAperture);
-                    }
-                } else{
-                    intent.putExtra(EXTRA_USER_MAKE, userMake);
-                    intent.putExtra(EXTRA_USER_FOCAL_lENGTH, userFocalLength);
-                    intent.putExtra(EXTRA_USER_APERTURE, userAperture);
-                }
+                intent.putExtra(EXTRA_USER_MAKE, userMake);
+                intent.putExtra(EXTRA_USER_FOCAL_lENGTH, userFocalLength);
+                intent.putExtra(EXTRA_USER_APERTURE, userAperture);
 
                 setResult(Activity.RESULT_OK, intent);
                 finish();
