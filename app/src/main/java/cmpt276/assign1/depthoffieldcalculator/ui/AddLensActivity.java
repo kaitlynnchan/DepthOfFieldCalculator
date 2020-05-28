@@ -3,6 +3,7 @@ package cmpt276.assign1.depthoffieldcalculator.ui;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -18,6 +19,10 @@ public class AddLensActivity extends AppCompatActivity {
     public static final String EXTRA_USER_MAKE = "user make";
     public static final String EXTRA_USER_FOCAL_lENGTH = "user focal length";
     public static final String EXTRA_USER_APERTURE = "user aperture";
+
+    public static Intent makeLaunchIntent(Context context){
+        return new Intent(context, AddLensActivity.class);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
