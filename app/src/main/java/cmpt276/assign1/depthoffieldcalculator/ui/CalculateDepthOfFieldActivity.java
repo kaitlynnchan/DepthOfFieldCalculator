@@ -68,18 +68,38 @@ public class CalculateDepthOfFieldActivity extends AppCompatActivity {
             public void onClick(View v) {
                 EditText userCOCEntry = findViewById(R.id.editTextCOC);
                 String userCOCData = userCOCEntry.getText().toString();
-                double userCOC = Double.parseDouble(userCOCData);
 
                 EditText userDistanceEntry = findViewById(R.id.editTextDistance);
                 String userDistanceData = userDistanceEntry.getText().toString();
-                double userDistance = Double.parseDouble(userDistanceData);
 
                 EditText userApertureEntry = findViewById(R.id.editTextAperture);
                 String userApertureData = userApertureEntry.getText().toString();
+
+                if(userCOCData.isEmpty()
+                        || userDistanceData.isEmpty()
+                        || userApertureData.isEmpty())
+                {
+                    Toast.makeText(CalculateDepthOfFieldActivity.this,
+                            "Circle of confusion, Distance, and Aperture cannot be empty",
+                            Toast.LENGTH_LONG)
+                            .show();
+                    return;
+                }
+
+
+                double userCOC = Double.parseDouble(userCOCData);
+                double userDistance = Double.parseDouble(userDistanceData);
                 double userAperture = Double.parseDouble(userApertureData);
 
-                // Multiply userDistance by 1000 to convert units from m to mm
-                calculateDepthOfField(userCOC, userDistance * 1000, userAperture);
+                if(userAperture < 1.4){
+                    Toast.makeText(CalculateDepthOfFieldActivity.this,
+                            "Aperture cannot be less than 1.4",
+                            Toast.LENGTH_LONG)
+                            .show();
+                } else {
+                    // Multiply userDistance by 1000 to convert units from m to mm
+                    calculateDepthOfField(userCOC, userDistance * 1000, userAperture);
+                }
             }
         });
     }

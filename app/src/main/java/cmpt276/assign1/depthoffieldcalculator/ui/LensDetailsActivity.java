@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import cmpt276.assign1.depthoffieldcalculator.R;
 
@@ -69,19 +70,39 @@ public class LensDetailsActivity extends AppCompatActivity {
 
                 EditText userFocalLengthEntry = findViewById(R.id.editTextFocalLength);
                 String userFocalLengthData = userFocalLengthEntry.getText().toString();
-                int userFocalLength = Integer.parseInt(userFocalLengthData);
 
                 EditText userApertureEntry = findViewById(R.id.editTextAperture);
                 String userApertureData = userApertureEntry.getText().toString();
+
+                if(userMake.isEmpty()
+                        || userFocalLengthData.isEmpty()
+                        || userApertureData.isEmpty())
+                {
+                    Toast.makeText(LensDetailsActivity.this,
+                            "Make, Focal length, and Aperture cannot be empty",
+                            Toast.LENGTH_LONG)
+                            .show();
+                    return;
+                }
+
+                int userFocalLength = Integer.parseInt(userFocalLengthData);
                 double userAperture = Double.parseDouble(userApertureData);
 
-                Intent intent = new Intent();
-                intent.putExtra(EXTRA_USER_MAKE, userMake);
-                intent.putExtra(EXTRA_USER_FOCAL_lENGTH, userFocalLength);
-                intent.putExtra(EXTRA_USER_APERTURE, userAperture);
+                if(userAperture < 1.4){
+                    Toast.makeText(LensDetailsActivity.this,
+                            "Aperture cannot be less than 1.4",
+                            Toast.LENGTH_LONG)
+                            .show();
+                } else{
+                    Intent intent = new Intent();
+                    intent.putExtra(EXTRA_USER_MAKE, userMake);
+                    intent.putExtra(EXTRA_USER_FOCAL_lENGTH, userFocalLength);
+                    intent.putExtra(EXTRA_USER_APERTURE, userAperture);
 
-                setResult(Activity.RESULT_OK, intent);
-                finish();
+                    setResult(Activity.RESULT_OK, intent);
+                    finish();
+                }
+
             }
         });
     }

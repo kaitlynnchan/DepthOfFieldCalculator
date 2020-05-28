@@ -52,7 +52,7 @@
         android:id="@+id/textView6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Optional features:\n2. Edit and Delete Lens"
+        android:text="Optional features:\n2. Edit and Delete Lens\n3. Error Checking Input"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guidelineLower" />
 
