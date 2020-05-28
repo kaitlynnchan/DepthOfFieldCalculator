@@ -29,6 +29,7 @@ import cmpt276.assign1.depthoffieldcalculator.model.LensManager;
 public class MainActivity extends AppCompatActivity {
 
     public static final int RESULT_CODE_ADD_LENS = 42;
+    public static final int RESULT_CODE_CALCULATE_DOF = 43;
 
     private LensManager manager;
 
@@ -77,6 +78,10 @@ public class MainActivity extends AppCompatActivity {
                 manager.add(new Lens(make, aperture, focalLength));
                 populateListView();
 
+                break;
+
+            case RESULT_CODE_CALCULATE_DOF:
+                populateListView();
                 break;
         }
 
@@ -132,7 +137,7 @@ public class MainActivity extends AppCompatActivity {
                         MainActivity.this,
                         position
                 );
-                startActivity(intent);
+                startActivityForResult(intent, RESULT_CODE_CALCULATE_DOF);
             }
         });
     }

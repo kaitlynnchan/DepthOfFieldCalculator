@@ -50,6 +50,7 @@ public class CalculateDepthOfFieldActivity extends AppCompatActivity {
 
         setupButtonCalculate();
         setupButtonEdit();
+        setupButtonDelete();
     }
 
     private void setupButtonCalculate() {
@@ -114,6 +115,19 @@ public class CalculateDepthOfFieldActivity extends AppCompatActivity {
                         CalculateDepthOfFieldActivity.this, true);
                 intent.putExtra(EXTRA_LENS_INDEX, lensIndex);
                 startActivityForResult(intent, RESULT_CODE_EDIT_LENS);
+            }
+        });
+    }
+
+    private void setupButtonDelete() {
+        Button btnDelete = (Button) findViewById(R.id.buttonDelete);
+        btnDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                manager.remove(lens);
+                Intent intent = new Intent();
+                setResult(Activity.RESULT_OK, intent);
+                finish();
             }
         });
     }
