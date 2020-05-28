@@ -131,22 +131,7 @@ public class CalculateDepthOfFieldActivity extends AppCompatActivity {
 
         switch (requestCode){
             case RESULT_CODE_EDIT_LENS:
-                String make = data.getStringExtra(AddLensActivity.EXTRA_USER_MAKE);
-                int focalLength = data.getIntExtra(AddLensActivity.EXTRA_USER_FOCAL_lENGTH, 0);
-                double aperture = data.getDoubleExtra(AddLensActivity.EXTRA_USER_APERTURE, 0);
-
-                if(lens.getMake() != make){
-                    lens.setMake(make);
-                }
-                if(lens.getFocalLength() != focalLength){
-                    lens.setFocalLength(focalLength);
-                }
-                if(lens.getMaxAperture() != aperture){
-                    lens.setMaxAperture(aperture);
-                }
-
                 lensText.setText(lens.toString());
-
                 break;
         }
     }

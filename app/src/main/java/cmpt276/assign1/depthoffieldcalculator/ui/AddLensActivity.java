@@ -25,6 +25,8 @@ public class AddLensActivity extends AppCompatActivity {
     private static final String EXTRA_EXISTED = "existed lens";
     private static final String EXTRA_LENS_INDEX = "extra lens index";
     private LensManager manager;
+    private Boolean existed;
+    private Lens lens;
 
     public static Intent makeLaunchIntent(Context context, Boolean existed){
         Intent intent = new Intent(context, AddLensActivity.class);
@@ -38,7 +40,7 @@ public class AddLensActivity extends AppCompatActivity {
         setContentView(R.layout.activity_add_lens);
 
         Intent intent = getIntent();
-        Boolean existed = intent.getBooleanExtra(EXTRA_EXISTED, false);
+        existed = intent.getBooleanExtra(EXTRA_EXISTED, false);
         if(existed){
             int lensIndex = intent.getIntExtra(EXTRA_LENS_INDEX, 0);
             setEditTexts(lensIndex);
@@ -50,7 +52,7 @@ public class AddLensActivity extends AppCompatActivity {
 
     private void setEditTexts(int lensIndex) {
         manager = LensManager.getInstance();
-        Lens lens = manager.getLens(lensIndex);
+        lens = manager.getLens(lensIndex);
 
         EditText userMakeEntry = (EditText) findViewById(R.id.editTextMake);
         userMakeEntry.setText(lens.getMake());
@@ -79,11 +81,24 @@ public class AddLensActivity extends AppCompatActivity {
                 double userAperture = Double.parseDouble(userApertureData);
 
                 Intent intent = new Intent();
-                intent.putExtra(EXTRA_USER_MAKE, userMake);
-                intent.putExtra(EXTRA_USER_FOCAL_lENGTH, userFocalLength);
-                intent.putExtra(EXTRA_USER_APERTURE, userAperture);
-                setResult(Activity.RESULT_OK, intent);
 
+                if(existed){
+                    if(lens.getMake() != userMake){
+                        lens.setMake(userMake);
+                    }
+                    if(lens.getFocalLength() != userFocalLength){
+                        lens.setFocalLength(userFocalLength);
+                    }
+                    if(lens.getMaxAperture() != userAperture){
+                        lens.setMaxAperture(userAperture);
+                    }
+                } else{
+                    intent.putExtra(EXTRA_USER_MAKE, userMake);
+                    intent.putExtra(EXTRA_USER_FOCAL_lENGTH, userFocalLength);
+                    intent.putExtra(EXTRA_USER_APERTURE, userAperture);
+                }
+
+                setResult(Activity.RESULT_OK, intent);
                 finish();
             }
         });
