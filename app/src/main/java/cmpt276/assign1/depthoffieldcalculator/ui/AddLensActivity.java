@@ -21,7 +21,6 @@ public class AddLensActivity extends AppCompatActivity {
     public static final String EXTRA_USER_APERTURE = "user aperture";
 
     private static final String EXTRA_EXISTED = "existed lens";
-    private Boolean existed;
 
     public static Intent makeLaunchIntent(Context context, Boolean existed){
         Intent intent = new Intent(context, AddLensActivity.class);
@@ -35,7 +34,7 @@ public class AddLensActivity extends AppCompatActivity {
         setContentView(R.layout.activity_add_lens);
 
         Intent intent = getIntent();
-        existed = intent.getBooleanExtra(EXTRA_EXISTED, false);
+        Boolean existed = intent.getBooleanExtra(EXTRA_EXISTED, false);
         if(existed){
             String make = intent.getStringExtra(CalculateDepthOfFieldActivity.EXTRA_LENS_MAKE);
             int focalLength = intent.getIntExtra(CalculateDepthOfFieldActivity.EXTRA_LENS_FOCAL_LENGTH, 0);
@@ -48,29 +47,29 @@ public class AddLensActivity extends AppCompatActivity {
     }
 
     private void setEditTexts(String make, int focalLength, double aperture) {
-        EditText userMakeEntry = (EditText) findViewById(R.id.editTextMake);
+        EditText userMakeEntry = findViewById(R.id.editTextMake);
         userMakeEntry.setText(make);
 
-        EditText userFocalLengthEntry = (EditText) findViewById(R.id.editTextFocalLength);
+        EditText userFocalLengthEntry = findViewById(R.id.editTextFocalLength);
         userFocalLengthEntry.setText("" + focalLength);
 
-        EditText userApertureEntry = (EditText) findViewById(R.id.editTextAperture);
+        EditText userApertureEntry = findViewById(R.id.editTextAperture);
         userApertureEntry.setText("" + aperture);
     }
 
     private void setupButtonSave() {
-        Button btnSave = (Button) findViewById(R.id.buttonSave);
+        Button btnSave = findViewById(R.id.buttonSave);
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                EditText userMakeEntry = (EditText) findViewById(R.id.editTextMake);
+                EditText userMakeEntry = findViewById(R.id.editTextMake);
                 String userMake = userMakeEntry.getText().toString();
 
-                EditText userFocalLengthEntry = (EditText) findViewById(R.id.editTextFocalLength);
+                EditText userFocalLengthEntry = findViewById(R.id.editTextFocalLength);
                 String userFocalLengthData = userFocalLengthEntry.getText().toString();
                 int userFocalLength = Integer.parseInt(userFocalLengthData);
 
-                EditText userApertureEntry = (EditText) findViewById(R.id.editTextAperture);
+                EditText userApertureEntry = findViewById(R.id.editTextAperture);
                 String userApertureData = userApertureEntry.getText().toString();
                 double userAperture = Double.parseDouble(userApertureData);
 
@@ -86,7 +85,7 @@ public class AddLensActivity extends AppCompatActivity {
     }
 
     private void setupButtonCancel() {
-        Button btnCancel = (Button) findViewById(R.id.buttonCancel);
+        Button btnCancel = findViewById(R.id.buttonCancel);
         btnCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

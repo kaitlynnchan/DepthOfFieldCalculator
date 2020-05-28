@@ -1,3 +1,27 @@
 <resources>
     <string name="app_name">Depth Of Field Calculator</string>
+    <string name="select_a_lens">Select a lens:</string>
+    <string name="make">Make</string>
+    <string name="focal_length_mm">Focal Length [mm]</string>
+    <string name="aperture">Aperture</string>
+    <string name="ex_canon">ex. Canon</string>
+    <string name="ex_200_for_200mm">ex. 200 for 200mm</string>
+    <string name="ex_2_8_for_f2_8">ex. 2.8 for F2.8</string>
+    <string name="save">Save</string>
+    <string name="add_lens">Add Lens</string>
+    <string name="enter_all_values">Enter all values</string>
+    <string name="far_focal_distance">Far Focal Distance</string>
+    <string name="near_focal_distance">Near Focal Distance</string>
+    <string name="hyperfocal_distance">Hyperfocal Distance</string>
+    <string name="depth_of_field">Depth of Field</string>
+    <string name="_0_029">0.029</string>
+    <string name="lens">Lens</string>
+    <string name="ex_1_5_for_1_5m">ex: 1.5 for 1.5m</string>
+    <string name="selected_aperture">Selected aperture</string>
+    <string name="circle_of_confusion_m">Circle of Confusion [m]</string>
+    <string name="distance_to_subject_m">Distance to subject [m]</string>
+    <string name="photo_details_with">Photo details with</string>
+    <string name="calculate">Calculate</string>
+    <string name="edit_lens">Edit Lens</string>
+    <string name="delete">Delete</string>
 </resources>

@@ -16,22 +16,6 @@ public class DepthOfFieldCalculator {
         this.COC = COC;
     }
 
-    public Lens getLens() {
-        return lens;
-    }
-
-    public double getAperture() {
-        return aperture;
-    }
-
-    public double getDistance() {
-        return distance;
-    }
-
-    public double getCOC() {
-        return COC;
-    }
-
     public double hyperFocalDistance(){
         return (lens.getFocalLength() * lens.getFocalLength()) / (aperture * COC);
     }

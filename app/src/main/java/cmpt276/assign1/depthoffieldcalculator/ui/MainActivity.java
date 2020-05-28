@@ -95,7 +95,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void populateListView(){
         ArrayAdapter<LensManager> adapter = new MyListAdapter();
-        ListView list = (ListView) findViewById(R.id.listViewLens);
+        ListView list = findViewById(R.id.listViewLens);
         list.setAdapter(adapter);
     }
 
@@ -114,13 +114,13 @@ public class MainActivity extends AppCompatActivity {
 
             Lens currentLens = manager.getLens(position);
 
-            TextView makeText = (TextView) itemView.findViewById(R.id.item_textViewMake);
+            TextView makeText = itemView.findViewById(R.id.item_textViewMake);
             makeText.setText(currentLens.getMake());
 
-            TextView focalLengthText = (TextView) itemView.findViewById(R.id.item_textViewFocalLength);
+            TextView focalLengthText = itemView.findViewById(R.id.item_textViewFocalLength);
             focalLengthText.setText(currentLens.getFocalLength() + "mm");
 
-            TextView apertureText = (TextView) itemView.findViewById(R.id.item_textViewAperture);
+            TextView apertureText = itemView.findViewById(R.id.item_textViewAperture);
             apertureText.setText("F" + currentLens.getMaxAperture());
 
             return itemView;
@@ -129,7 +129,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     private void registerClickCallback() {
-        ListView list = (ListView) findViewById(R.id.listViewLens);
+        ListView list = findViewById(R.id.listViewLens);
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {

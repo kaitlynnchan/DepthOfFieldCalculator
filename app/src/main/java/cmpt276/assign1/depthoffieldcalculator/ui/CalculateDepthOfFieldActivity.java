@@ -18,6 +18,10 @@ import cmpt276.assign1.depthoffieldcalculator.model.DepthOfFieldCalculator;
 import cmpt276.assign1.depthoffieldcalculator.model.Lens;
 import cmpt276.assign1.depthoffieldcalculator.model.LensManager;
 
+/**
+ * Compute depth of field values for the selected Lens
+ * Able to edit and delete selected lens
+ */
 public class CalculateDepthOfFieldActivity extends AppCompatActivity {
 
     public static final int RESULT_CODE_EDIT_LENS = 42;
@@ -26,9 +30,9 @@ public class CalculateDepthOfFieldActivity extends AppCompatActivity {
     public static final String EXTRA_LENS_APERTURE = "lens aperture";
 
     private static final String EXTRA_LENS_INDEX = "extra lens index";
+    private static final String INVALID_APERTURE = "Invalid aperture";
     private LensManager manager;
     private Lens lens;
-    private int lensIndex;
     private TextView lensText;
 
     public static Intent makeLaunchIntent(Context context, int lensIdx){
@@ -43,12 +47,12 @@ public class CalculateDepthOfFieldActivity extends AppCompatActivity {
         setContentView(R.layout.activity_calculate_depth_of_field);
 
         Intent intent = getIntent();
-        lensIndex = intent.getIntExtra(EXTRA_LENS_INDEX, 0);
+        int lensIndex = intent.getIntExtra(EXTRA_LENS_INDEX, 0);
 
         manager = LensManager.getInstance();
         lens = manager.getLens(lensIndex);
 
-        lensText = (TextView) findViewById(R.id.textViewLens);
+        lensText = findViewById(R.id.textViewLens);
         lensText.setText(lens.toString());
 
         setupButtonCalculate();
@@ -57,19 +61,19 @@ public class CalculateDepthOfFieldActivity extends AppCompatActivity {
     }
 
     private void setupButtonCalculate() {
-        Button btnCalculator = (Button) findViewById(R.id.buttonCalculate);
+        Button btnCalculator = findViewById(R.id.buttonCalculate);
         btnCalculator.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                EditText userCOCEntry = (EditText) findViewById(R.id.editTextCOC);
+                EditText userCOCEntry = findViewById(R.id.editTextCOC);
                 String userCOCData = userCOCEntry.getText().toString();
                 double userCOC = Double.parseDouble(userCOCData);
 
-                EditText userDistanceEntry = (EditText) findViewById(R.id.editTextDistance);
+                EditText userDistanceEntry = findViewById(R.id.editTextDistance);
                 String userDistanceData = userDistanceEntry.getText().toString();
                 double userDistance = Double.parseDouble(userDistanceData);
 
-                EditText userApertureEntry = (EditText) findViewById(R.id.editTextAperture);
+                EditText userApertureEntry = findViewById(R.id.editTextAperture);
                 String userApertureData = userApertureEntry.getText().toString();
                 double userAperture = Double.parseDouble(userApertureData);
 
@@ -80,16 +84,16 @@ public class CalculateDepthOfFieldActivity extends AppCompatActivity {
     }
 
     private void calculateDepthOfField(double userCOC, double userDistance, double userAperture){
-        TextView nearFocalDistance = (TextView) findViewById(R.id.txtNearFocalDistance);
-        TextView farFocalDistance = (TextView) findViewById(R.id.txtFarFocalDistance);
-        TextView depthOfField = (TextView) findViewById(R.id.txtDepthOfField);
-        TextView hyperFocalDistance = (TextView) findViewById(R.id.txtHyperFocalDistance);
+        TextView nearFocalDistance = findViewById(R.id.txtNearFocalDistance);
+        TextView farFocalDistance = findViewById(R.id.txtFarFocalDistance);
+        TextView depthOfField = findViewById(R.id.txtDepthOfField);
+        TextView hyperFocalDistance = findViewById(R.id.txtHyperFocalDistance);
 
         if(userAperture < lens.getMaxAperture()){
-            nearFocalDistance.setText("Invalid aperture");
-            farFocalDistance.setText("Invalid aperture");
-            depthOfField.setText("Invalid aperture");
-            hyperFocalDistance.setText("Invalid aperture");
+            nearFocalDistance.setText(INVALID_APERTURE);
+            farFocalDistance.setText(INVALID_APERTURE);
+            depthOfField.setText(INVALID_APERTURE);
+            hyperFocalDistance.setText(INVALID_APERTURE);
         } else{
             DepthOfFieldCalculator doFCalculator = new DepthOfFieldCalculator(
                     lens, userAperture, userDistance, userCOC
@@ -97,20 +101,14 @@ public class CalculateDepthOfFieldActivity extends AppCompatActivity {
 
             // Divide distances by 1000 to convert units from mm to m
             nearFocalDistance.setText(doFCalculator.nearFocalPoint() / 1000 + "m");
+            farFocalDistance.setText(doFCalculator.farFocalPoint() / 1000 + "m");
             hyperFocalDistance.setText(doFCalculator.hyperFocalDistance() / 1000 + "m");
-
-            if(doFCalculator.farFocalPoint() == Double.POSITIVE_INFINITY){
-                farFocalDistance.setText("Infinitym");
-                depthOfField.setText("Infinitym");
-            } else{
-                farFocalDistance.setText(doFCalculator.farFocalPoint() / 1000 + "m");
-                depthOfField.setText(doFCalculator.depthOfField() / 1000 + "m");
-            }
+            depthOfField.setText(doFCalculator.depthOfField() / 1000 + "m");
         }
     }
 
     private void setupButtonEdit(){
-        Button btnEdit = (Button) findViewById(R.id.buttonEdit);
+        Button btnEdit = findViewById(R.id.buttonEdit);
         btnEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -125,7 +123,7 @@ public class CalculateDepthOfFieldActivity extends AppCompatActivity {
     }
 
     private void setupButtonDelete() {
-        Button btnDelete = (Button) findViewById(R.id.buttonDelete);
+        Button btnDelete = findViewById(R.id.buttonDelete);
         btnDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -154,7 +152,7 @@ public class CalculateDepthOfFieldActivity extends AppCompatActivity {
                 int userFocalLength = data.getIntExtra(AddLensActivity.EXTRA_USER_FOCAL_lENGTH, 0);
                 double userAperture = data.getDoubleExtra(AddLensActivity.EXTRA_USER_APERTURE, 0);
 
-                if(lens.getMake() != userMake){
+                if(!userMake.equals(lens.getMake())){
                     lens.setMake(userMake);
                 }
                 if(lens.getFocalLength() != userFocalLength){
@@ -166,6 +164,8 @@ public class CalculateDepthOfFieldActivity extends AppCompatActivity {
 
                 lensText.setText(lens.toString());
                 break;
+            default:
+                assert false;
         }
     }
 }
