@@ -7,6 +7,8 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -56,52 +58,52 @@ public class CalculateDepthOfFieldActivity extends AppCompatActivity {
         lensText = findViewById(R.id.textViewLens);
         lensText.setText(lens.toString());
 
-        setupButtonCalculate();
+        setupAutoCalculate();
         setupButtonEdit();
         setupButtonDelete();
     }
 
-    private void setupButtonCalculate() {
-        Button btnCalculator = findViewById(R.id.buttonCalculate);
-        btnCalculator.setOnClickListener(new View.OnClickListener() {
+    private void setupAutoCalculate(){
+
+        EditText userCOCEntry = findViewById(R.id.editTextCOC);
+        EditText userDistanceEntry = findViewById(R.id.editTextDistance);
+        EditText userApertureEntry = findViewById(R.id.editTextAperture);
+
+        TextWatcher watcher = new TextWatcher() {
             @Override
-            public void onClick(View v) {
-                EditText userCOCEntry = findViewById(R.id.editTextCOC);
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
                 String userCOCData = userCOCEntry.getText().toString();
-
-                EditText userDistanceEntry = findViewById(R.id.editTextDistance);
                 String userDistanceData = userDistanceEntry.getText().toString();
-
-                EditText userApertureEntry = findViewById(R.id.editTextAperture);
                 String userApertureData = userApertureEntry.getText().toString();
 
-                if(userCOCData.isEmpty()
-                        || userDistanceData.isEmpty()
-                        || userApertureData.isEmpty())
+                if(!userCOCData.isEmpty()
+                        && !userDistanceData.isEmpty()
+                        && !userApertureData.isEmpty())
                 {
-                    Toast.makeText(CalculateDepthOfFieldActivity.this,
-                            "Circle of confusion, Distance, and Aperture cannot be empty",
-                            Toast.LENGTH_LONG)
-                            .show();
-                    return;
-                }
+                    double userCOC = Double.parseDouble(userCOCData);
+                    double userDistance = Double.parseDouble(userDistanceData);
+                    double userAperture = Double.parseDouble(userApertureData);
 
-
-                double userCOC = Double.parseDouble(userCOCData);
-                double userDistance = Double.parseDouble(userDistanceData);
-                double userAperture = Double.parseDouble(userApertureData);
-
-                if(userAperture < 1.4){
-                    Toast.makeText(CalculateDepthOfFieldActivity.this,
-                            "Aperture cannot be less than 1.4",
-                            Toast.LENGTH_LONG)
-                            .show();
-                } else {
                     // Multiply userDistance by 1000 to convert units from m to mm
                     calculateDepthOfField(userCOC, userDistance * 1000, userAperture);
                 }
             }
-        });
+        };
+
+        userCOCEntry.addTextChangedListener(watcher);
+        userDistanceEntry.addTextChangedListener(watcher);
+        userApertureEntry.addTextChangedListener(watcher);
+
     }
 
     private void calculateDepthOfField(double userCOC, double userDistance, double userAperture){
