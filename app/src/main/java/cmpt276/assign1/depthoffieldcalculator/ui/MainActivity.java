@@ -7,7 +7,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -20,12 +19,17 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.util.Collections;
-import java.util.List;
 
 import cmpt276.assign1.depthoffieldcalculator.R;
 import cmpt276.assign1.depthoffieldcalculator.model.Lens;
 import cmpt276.assign1.depthoffieldcalculator.model.LensManager;
 
+/**
+ * Launch Activity
+ * Displays lens in a list View
+ * Can add lens by the floating action button
+ * Can click the lens in list
+ */
 public class MainActivity extends AppCompatActivity {
 
     public static final int RESULT_CODE_ADD_LENS = 42;
@@ -44,47 +48,11 @@ public class MainActivity extends AppCompatActivity {
         populateListView();
         registerClickCallback();
 
-        FloatingActionButton add = findViewById(R.id.addButton);
+        FloatingActionButton add = findViewById(R.id.buttonAdd);
         add.setOnClickListener(view -> {
-            Intent intent = AddLensActivity.makeLaunchIntent(MainActivity.this, false);
+            Intent intent = LensDetailsActivity.makeLaunchIntent(MainActivity.this, false);
             startActivityForResult(intent, RESULT_CODE_ADD_LENS);
         });
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data){
-        super.onActivityResult(requestCode, resultCode, data);
-
-        if(resultCode == Activity.RESULT_CANCELED){
-            String message = "Canceled";
-            Toast.makeText(MainActivity.this, message, Toast.LENGTH_LONG).show();
-            return;
-        }
-
-        switch (requestCode){
-            case RESULT_CODE_ADD_LENS:
-
-                // Unneeded
-                Snackbar.make(findViewById(R.id.myMainActivity),
-                        "Added new lens",
-                        Snackbar.LENGTH_LONG)
-                        .setAction("Action", null)
-                        .show();
-
-                String make = data.getStringExtra(AddLensActivity.EXTRA_USER_MAKE);
-                int focalLength = data.getIntExtra(AddLensActivity.EXTRA_USER_FOCAL_lENGTH, 0);
-                double aperture = data.getDoubleExtra(AddLensActivity.EXTRA_USER_APERTURE, 0);
-
-                manager.add(new Lens(make, aperture, focalLength));
-                populateListView();
-
-                break;
-
-            case RESULT_CODE_CALCULATE_DOF:
-                populateListView();
-                break;
-        }
-
     }
 
     private void populateLensManager(){
@@ -127,7 +95,6 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-
     private void registerClickCallback() {
         ListView list = findViewById(R.id.listViewLens);
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -140,6 +107,43 @@ public class MainActivity extends AppCompatActivity {
                 startActivityForResult(intent, RESULT_CODE_CALCULATE_DOF);
             }
         });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data){
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if(resultCode == Activity.RESULT_CANCELED){
+            String message = "Canceled";
+            Toast.makeText(MainActivity.this, message, Toast.LENGTH_LONG).show();
+            return;
+        }
+
+        switch (requestCode){
+            case RESULT_CODE_ADD_LENS:
+
+                // Unneeded snackbar
+                Snackbar.make(findViewById(R.id.myMainActivity),
+                        "Added new lens",
+                        Snackbar.LENGTH_LONG)
+                        .setAction("Action", null)
+                        .show();
+
+                String make = data.getStringExtra(LensDetailsActivity.EXTRA_USER_MAKE);
+                int focalLength = data.getIntExtra(LensDetailsActivity.EXTRA_USER_FOCAL_lENGTH, 0);
+                double aperture = data.getDoubleExtra(LensDetailsActivity.EXTRA_USER_APERTURE, 0);
+
+                manager.add(new Lens(make, aperture, focalLength));
+                populateListView();
+
+                break;
+
+            case RESULT_CODE_CALCULATE_DOF:
+                populateListView();
+                break;
+            default:
+                assert false;
+        }
     }
 
 }

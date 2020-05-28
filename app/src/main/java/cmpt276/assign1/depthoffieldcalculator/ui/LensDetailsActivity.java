@@ -10,11 +10,13 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-import com.google.android.material.snackbar.Snackbar;
-
 import cmpt276.assign1.depthoffieldcalculator.R;
 
-public class AddLensActivity extends AppCompatActivity {
+/**
+ * Displays and allows user to input make, focal length, and aperture of lens
+ * Able to add or edit lens
+ */
+public class LensDetailsActivity extends AppCompatActivity {
 
     public static final String EXTRA_USER_MAKE = "user make";
     public static final String EXTRA_USER_FOCAL_lENGTH = "user focal length";
@@ -23,7 +25,7 @@ public class AddLensActivity extends AppCompatActivity {
     private static final String EXTRA_EXISTED = "existed lens";
 
     public static Intent makeLaunchIntent(Context context, Boolean existed){
-        Intent intent = new Intent(context, AddLensActivity.class);
+        Intent intent = new Intent(context, LensDetailsActivity.class);
         intent.putExtra(EXTRA_EXISTED, existed);
         return intent;
     }

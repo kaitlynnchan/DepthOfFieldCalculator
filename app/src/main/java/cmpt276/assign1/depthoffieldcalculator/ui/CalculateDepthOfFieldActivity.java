@@ -20,6 +20,7 @@ import cmpt276.assign1.depthoffieldcalculator.model.LensManager;
 
 /**
  * Compute depth of field values for the selected Lens
+ * Allows user to input circle of confusion, distance, and aperture
  * Able to edit and delete selected lens
  */
 public class CalculateDepthOfFieldActivity extends AppCompatActivity {
@@ -112,7 +113,7 @@ public class CalculateDepthOfFieldActivity extends AppCompatActivity {
         btnEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = AddLensActivity.makeLaunchIntent(
+                Intent intent = LensDetailsActivity.makeLaunchIntent(
                         CalculateDepthOfFieldActivity.this, true);
                 intent.putExtra(EXTRA_LENS_MAKE, lens.getMake());
                 intent.putExtra(EXTRA_LENS_FOCAL_LENGTH, lens.getFocalLength());
@@ -148,9 +149,9 @@ public class CalculateDepthOfFieldActivity extends AppCompatActivity {
 
         switch (requestCode){
             case RESULT_CODE_EDIT_LENS:
-                String userMake = data.getStringExtra(AddLensActivity.EXTRA_USER_MAKE);
-                int userFocalLength = data.getIntExtra(AddLensActivity.EXTRA_USER_FOCAL_lENGTH, 0);
-                double userAperture = data.getDoubleExtra(AddLensActivity.EXTRA_USER_APERTURE, 0);
+                String userMake = data.getStringExtra(LensDetailsActivity.EXTRA_USER_MAKE);
+                int userFocalLength = data.getIntExtra(LensDetailsActivity.EXTRA_USER_FOCAL_lENGTH, 0);
+                double userAperture = data.getDoubleExtra(LensDetailsActivity.EXTRA_USER_APERTURE, 0);
 
                 if(!userMake.equals(lens.getMake())){
                     lens.setMake(userMake);
