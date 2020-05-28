@@ -29,6 +29,7 @@ import cmpt276.assign1.depthoffieldcalculator.model.LensManager;
 public class MainActivity extends AppCompatActivity {
 
     public static final int RESULT_CODE_ADD_LENS = 42;
+
     private LensManager manager;
 
     @Override

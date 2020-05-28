@@ -1,5 +1,6 @@
 package cmpt276.assign1.depthoffieldcalculator.ui;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
@@ -10,6 +11,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import cmpt276.assign1.depthoffieldcalculator.R;
 import cmpt276.assign1.depthoffieldcalculator.model.DepthOfFieldCalculator;
@@ -18,9 +20,13 @@ import cmpt276.assign1.depthoffieldcalculator.model.LensManager;
 
 public class CalculateDepthOfFieldActivity extends AppCompatActivity {
 
+    public static final int RESULT_CODE_EDIT_LENS = 42;
+
     private static final String EXTRA_LENS_INDEX = "extra lens index";
     private LensManager manager;
     private Lens lens;
+    private int lensIndex;
+    private TextView lensText;
 
     public static Intent makeLaunchIntent(Context context, int lensIdx){
         Intent intent = new Intent(context, CalculateDepthOfFieldActivity.class);
@@ -34,15 +40,16 @@ public class CalculateDepthOfFieldActivity extends AppCompatActivity {
         setContentView(R.layout.activity_calculate_depth_of_field);
 
         Intent intent = getIntent();
-        int lensIndex = intent.getIntExtra(EXTRA_LENS_INDEX, 0);
+        lensIndex = intent.getIntExtra(EXTRA_LENS_INDEX, 0);
 
         manager = LensManager.getInstance();
         lens = manager.getLens(lensIndex);
 
-        TextView lensText = (TextView) findViewById(R.id.textViewLens);
+        lensText = (TextView) findViewById(R.id.textViewLens);
         lensText.setText(lens.toString());
 
         setupButtonCalculate();
+        setupButtonEdit();
     }
 
     private void setupButtonCalculate() {
@@ -95,6 +102,52 @@ public class CalculateDepthOfFieldActivity extends AppCompatActivity {
                 farFocalDistance.setText(doFCalculator.farFocalPoint() / 1000 + "m");
                 depthOfField.setText(doFCalculator.depthOfField() / 1000 + "m");
             }
+        }
+    }
+
+    private void setupButtonEdit(){
+        Button btnEdit = (Button) findViewById(R.id.buttonEdit);
+        btnEdit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = AddLensActivity.makeLaunchIntent(
+                        CalculateDepthOfFieldActivity.this, true);
+                intent.putExtra(EXTRA_LENS_INDEX, lensIndex);
+                startActivityForResult(intent, RESULT_CODE_EDIT_LENS);
+            }
+        });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if(resultCode == Activity.RESULT_CANCELED){
+            String message = "Canceled";
+            Toast.makeText(CalculateDepthOfFieldActivity.this, message, Toast.LENGTH_LONG)
+                    .show();
+            return;
+        }
+
+        switch (requestCode){
+            case RESULT_CODE_EDIT_LENS:
+                String make = data.getStringExtra(AddLensActivity.EXTRA_USER_MAKE);
+                int focalLength = data.getIntExtra(AddLensActivity.EXTRA_USER_FOCAL_lENGTH, 0);
+                double aperture = data.getDoubleExtra(AddLensActivity.EXTRA_USER_APERTURE, 0);
+
+                if(lens.getMake() != make){
+                    lens.setMake(make);
+                }
+                if(lens.getFocalLength() != focalLength){
+                    lens.setFocalLength(focalLength);
+                }
+                if(lens.getMaxAperture() != aperture){
+                    lens.setMaxAperture(aperture);
+                }
+
+                lensText.setText(lens.toString());
+
+                break;
         }
     }
 }
