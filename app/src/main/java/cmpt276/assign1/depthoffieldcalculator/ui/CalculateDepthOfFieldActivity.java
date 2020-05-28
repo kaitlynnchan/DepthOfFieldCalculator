@@ -79,7 +79,9 @@ public class CalculateDepthOfFieldActivity extends AppCompatActivity {
             depthOfField.setText("Invalid aperture");
             hyperFocalDistance.setText("Invalid aperture");
         } else{
-            DepthOfFieldCalculator doFCalculator = new DepthOfFieldCalculator(lens, userAperture, userDistance, userCOC);
+            DepthOfFieldCalculator doFCalculator = new DepthOfFieldCalculator(
+                    lens, userAperture, userDistance, userCOC
+            );
             nearFocalDistance.setText(doFCalculator.nearFocalPoint() + "m");
             farFocalDistance.setText(doFCalculator.farFocalPoint() + "m");
             depthOfField.setText(doFCalculator.depthOfField() + "m");

@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
 
         FloatingActionButton add = findViewById(R.id.addButton);
         add.setOnClickListener(view -> {
-            Intent intent = AddLensActivity.makeLaunchIntent(MainActivity.this);
+            Intent intent = AddLensActivity.makeLaunchIntent(MainActivity.this, false);
             startActivityForResult(intent, RESULT_CODE_ADD_LENS);
         });
     }

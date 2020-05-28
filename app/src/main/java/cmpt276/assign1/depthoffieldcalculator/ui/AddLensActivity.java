@@ -20,14 +20,22 @@ public class AddLensActivity extends AppCompatActivity {
     public static final String EXTRA_USER_FOCAL_lENGTH = "user focal length";
     public static final String EXTRA_USER_APERTURE = "user aperture";
 
-    public static Intent makeLaunchIntent(Context context){
-        return new Intent(context, AddLensActivity.class);
+    private static final String EXTRA_EXISTED = "existed lens";
+
+    public static Intent makeLaunchIntent(Context context, Boolean existed){
+        Intent intent = new Intent(context, AddLensActivity.class);
+        intent.putExtra(EXTRA_EXISTED, existed);
+        return intent;
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_lens);
+
+        // position of lens to add lens to see if it existed before then fill edittext
+        Intent intent = getIntent();
+        Boolean existed = intent.getBooleanExtra(EXTRA_EXISTED, false);
 
         setupButtonSave();
         setupButtonCancel();
