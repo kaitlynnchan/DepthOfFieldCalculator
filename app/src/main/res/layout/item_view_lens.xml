@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -7,6 +8,14 @@
         android:id="@+id/item_textViewMake"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/item_imageViewIcon"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="11dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="7dp"
+        android:layout_marginBottom="6dp"
+        android:layout_toEndOf="@+id/item_imageViewIcon"
+        android:layout_toRightOf="@+id/item_imageViewIcon"
         android:text="Make"
         android:textSize="24sp" />
 
@@ -14,8 +23,12 @@
         android:id="@+id/item_textViewFocalLength"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
+        android:layout_alignBottom="@+id/item_textViewMake"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="15dp"
         android:layout_marginLeft="16dp"
+        android:layout_marginTop="7dp"
+        android:layout_marginBottom="0dp"
         android:layout_toEndOf="@+id/item_textViewMake"
         android:layout_toRightOf="@+id/item_textViewMake"
         android:text="Focal length"
@@ -24,11 +37,21 @@
     <TextView
         android:id="@+id/item_textViewAperture"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
+        android:layout_height="32dp"
+        android:layout_alignBottom="@+id/item_textViewFocalLength"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="15dp"
         android:layout_marginLeft="16dp"
+        android:layout_marginTop="7dp"
+        android:layout_marginBottom="0dp"
         android:layout_toEndOf="@+id/item_textViewFocalLength"
         android:layout_toRightOf="@+id/item_textViewFocalLength"
         android:text="Aperture"
         android:textSize="24sp" />
+
+    <ImageView
+        android:id="@+id/item_imageViewIcon"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        app:srcCompat="@drawable/image_icon" />
 </RelativeLayout>

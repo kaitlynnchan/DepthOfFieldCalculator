@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import cmpt276.assign1.depthoffieldcalculator.R;
@@ -45,8 +46,19 @@ public class LensDetailsActivity extends AppCompatActivity {
             setEditTexts(make, focalLength, aperture);
         }
 
+        setupButtonIcon();
         setupButtonSave();
         setupButtonCancel();
+    }
+
+    private void setupButtonIcon() {
+        ImageButton btnIcon = findViewById(R.id.imageButtonIcon);
+        btnIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
     }
 
     private void setEditTexts(String make, int focalLength, double aperture) {
