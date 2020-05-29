@@ -43,10 +43,15 @@
         android:id="@+id/listViewLens"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:background="#FFFFFF"
         app:layout_constraintBottom_toTopOf="@+id/guidelineLower"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewSelect" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewSelect"
+        app:layout_constraintVertical_bias="1.0">
+
+    </ListView>
 
     <TextView
         android:id="@+id/textView6"
@@ -55,5 +60,40 @@
         android:text="Optional features:\n2. Edit and Delete Lens\n3. Error Checking Input\n4. Auto-reccalculate\n6. Lens Icons"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guidelineLower" />
+
+    <ImageView
+        android:id="@+id/emptyList_imageArrow"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@+id/buttonAdd"
+        app:layout_constraintEnd_toEndOf="@+id/buttonAdd"
+        app:layout_constraintStart_toEndOf="@+id/textView6"
+        app:layout_constraintTop_toBottomOf="@+id/emptyList_text1"
+        app:srcCompat="@drawable/arrow_drawn" />
+
+    <TextView
+        android:id="@+id/emptyList_text1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:text="There are currently no lens\nAdd a new lens"
+        android:textSize="18sp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/emptyList_text2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Click here"
+        android:textSize="18sp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@+id/buttonAdd"
+        app:layout_constraintEnd_toEndOf="@+id/buttonAdd"
+        app:layout_constraintStart_toStartOf="@+id/buttonAdd" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

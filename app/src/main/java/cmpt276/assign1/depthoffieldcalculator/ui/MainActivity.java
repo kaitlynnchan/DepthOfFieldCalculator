@@ -66,6 +66,7 @@ public class MainActivity extends AppCompatActivity {
         list.setAdapter(adapter);
 
         if(manager.getSize() <= 0){
+            list.setVisibility(View.INVISIBLE);
             setupEmptyListView();
         }
     }
@@ -101,7 +102,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setupEmptyListView() {
-
+        TextView text1 = findViewById(R.id.emptyList_text1);
+        text1.setVisibility(View.VISIBLE);
+        TextView text2 = findViewById(R.id.emptyList_text2);
+        text2.setVisibility(View.VISIBLE);
+        ImageView arrow = findViewById(R.id.emptyList_imageArrow);
+        arrow.setVisibility(View.VISIBLE);
     }
 
     private void registerClickCallback() {
