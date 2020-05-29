@@ -38,7 +38,6 @@ public class MainActivity extends AppCompatActivity {
     public static final int RESULT_CODE_CALCULATE_DOF = 43;
 
     private LensManager manager;
-    private ArrayList<Lens> lenses;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -65,11 +64,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void populateListView(){
-        lenses = new ArrayList<Lens>();
-        for(Lens l : manager){
-            lenses.add(l);
-        }
-
         ArrayAdapter<Lens> adapter = new MyListAdapter();
         ListView list = findViewById(R.id.listViewLens);
         list.setAdapter(adapter);
@@ -77,7 +71,7 @@ public class MainActivity extends AppCompatActivity {
 
     private class MyListAdapter extends ArrayAdapter<Lens> {
         public MyListAdapter() {
-            super(MainActivity.this, R.layout.item_view_lens, lenses);
+            super(MainActivity.this, R.layout.item_view_lens, manager.getLenses());
         }
 
         @NonNull
@@ -88,7 +82,7 @@ public class MainActivity extends AppCompatActivity {
                 itemView = getLayoutInflater().inflate(R.layout.item_view_lens, parent, false);
             }
 
-            Lens currentLens = lenses.get(position);
+            Lens currentLens = manager.getLens(position);
 
             TextView makeText = itemView.findViewById(R.id.item_textViewMake);
             makeText.setText(currentLens.getMake());
