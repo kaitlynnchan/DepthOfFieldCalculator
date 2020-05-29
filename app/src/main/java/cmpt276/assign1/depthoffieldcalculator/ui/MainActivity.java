@@ -11,16 +11,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
-
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 
 import cmpt276.assign1.depthoffieldcalculator.R;
 import cmpt276.assign1.depthoffieldcalculator.model.Lens;
@@ -58,9 +55,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void populateLensManager(){
-        manager.add(new Lens("Nikkor", 2.8, 24));
-        manager.add(new Lens("Sony", 1.8, 35));
-        manager.add(new Lens("Canon", 3.5, 80));
+        manager.add(new Lens("Nikkor", 2.8, 24, R.drawable.icon_picture));
+        manager.add(new Lens("Sony", 1.8, 35, R.drawable.icon_picture));
+        manager.add(new Lens("Canon", 3.5, 80, R.drawable.icon_picture));
     }
 
     private void populateListView(){
@@ -93,6 +90,8 @@ public class MainActivity extends AppCompatActivity {
             TextView apertureText = itemView.findViewById(R.id.item_textViewAperture);
             apertureText.setText("F" + currentLens.getMaxAperture());
 
+            ImageView icon = itemView.findViewById(R.id.item_imageViewIcon);
+            icon.setImageResource(currentLens.getIconID());
             return itemView;
         }
     }
@@ -134,8 +133,9 @@ public class MainActivity extends AppCompatActivity {
                 String make = data.getStringExtra(LensDetailsActivity.EXTRA_USER_MAKE);
                 int focalLength = data.getIntExtra(LensDetailsActivity.EXTRA_USER_FOCAL_lENGTH, 0);
                 double aperture = data.getDoubleExtra(LensDetailsActivity.EXTRA_USER_APERTURE, 0);
+                int iconID = data.getIntExtra(LensDetailsActivity.EXTRA_USER_ICON_ID, 0);
 
-                manager.add(new Lens(make, aperture, focalLength));
+                manager.add(new Lens(make, aperture, focalLength, iconID));
                 populateListView();
 
                 break;

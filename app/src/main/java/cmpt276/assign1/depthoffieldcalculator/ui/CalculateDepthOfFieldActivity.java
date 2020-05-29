@@ -31,6 +31,7 @@ public class CalculateDepthOfFieldActivity extends AppCompatActivity {
     public static final String EXTRA_LENS_MAKE = "lens make";
     public static final String EXTRA_LENS_FOCAL_LENGTH = "lens focal length";
     public static final String EXTRA_LENS_APERTURE = "lens aperture";
+    public static final String EXTRA_LENS_ICON_ID = "lens icon ID";
 
     private static final String EXTRA_LENS_INDEX = "extra lens index";
     private static final String INVALID_APERTURE = "Invalid aperture";
@@ -140,6 +141,7 @@ public class CalculateDepthOfFieldActivity extends AppCompatActivity {
                 intent.putExtra(EXTRA_LENS_MAKE, lens.getMake());
                 intent.putExtra(EXTRA_LENS_FOCAL_LENGTH, lens.getFocalLength());
                 intent.putExtra(EXTRA_LENS_APERTURE, lens.getMaxAperture());
+                intent.putExtra(EXTRA_LENS_ICON_ID, lens.getIconID());
                 startActivityForResult(intent, RESULT_CODE_EDIT_LENS);
             }
         });
@@ -174,6 +176,7 @@ public class CalculateDepthOfFieldActivity extends AppCompatActivity {
                 String userMake = data.getStringExtra(LensDetailsActivity.EXTRA_USER_MAKE);
                 int userFocalLength = data.getIntExtra(LensDetailsActivity.EXTRA_USER_FOCAL_lENGTH, 0);
                 double userAperture = data.getDoubleExtra(LensDetailsActivity.EXTRA_USER_APERTURE, 0);
+                int userIconID = data.getIntExtra(LensDetailsActivity.EXTRA_USER_ICON_ID, 0);
 
                 if(!userMake.equals(lens.getMake())){
                     lens.setMake(userMake);
@@ -183,6 +186,9 @@ public class CalculateDepthOfFieldActivity extends AppCompatActivity {
                 }
                 if(lens.getMaxAperture() != userAperture){
                     lens.setMaxAperture(userAperture);
+                }
+                if(lens.getIconID() != userIconID){
+                    lens.setIconID(userIconID);
                 }
 
                 lensText.setText(lens.toString());

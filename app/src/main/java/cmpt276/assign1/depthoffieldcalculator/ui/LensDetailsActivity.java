@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import cmpt276.assign1.depthoffieldcalculator.R;
@@ -23,8 +24,10 @@ public class LensDetailsActivity extends AppCompatActivity {
     public static final String EXTRA_USER_MAKE = "user make";
     public static final String EXTRA_USER_FOCAL_lENGTH = "user focal length";
     public static final String EXTRA_USER_APERTURE = "user aperture";
+    public static final String EXTRA_USER_ICON_ID = "user icon ID";
 
     private static final String EXTRA_EXISTED = "existed lens";
+    private int iconID;
 
     public static Intent makeLaunchIntent(Context context, Boolean existed){
         Intent intent = new Intent(context, LensDetailsActivity.class);
@@ -43,22 +46,95 @@ public class LensDetailsActivity extends AppCompatActivity {
             String make = intent.getStringExtra(CalculateDepthOfFieldActivity.EXTRA_LENS_MAKE);
             int focalLength = intent.getIntExtra(CalculateDepthOfFieldActivity.EXTRA_LENS_FOCAL_LENGTH, 0);
             double aperture = intent.getDoubleExtra(CalculateDepthOfFieldActivity.EXTRA_LENS_APERTURE, 0);
-            setEditTexts(make, focalLength, aperture);
+            int iconID = intent.getIntExtra(CalculateDepthOfFieldActivity.EXTRA_LENS_ICON_ID, 0);
+            setExistedParameters(make, focalLength, aperture, iconID);
         }
 
+        setupButtonIcons();
         setupButtonSave();
         setupButtonCancel();
     }
 
-    private void setEditTexts(String make, int focalLength, double aperture) {
-        EditText userMakeEntry = findViewById(R.id.editTextMake);
-        userMakeEntry.setText(make);
 
-        EditText userFocalLengthEntry = findViewById(R.id.editTextFocalLength);
-        userFocalLengthEntry.setText("" + focalLength);
+    private void setExistedParameters(String make, int focalLength, double aperture, int iconID) {
+        EditText existedMake = findViewById(R.id.editTextMake);
+        existedMake.setText(make);
 
-        EditText userApertureEntry = findViewById(R.id.editTextAperture);
-        userApertureEntry.setText("" + aperture);
+        EditText existedFocalLength = findViewById(R.id.editTextFocalLength);
+        existedFocalLength.setText("" + focalLength);
+
+        EditText existedAperture = findViewById(R.id.editTextAperture);
+        existedAperture.setText("" + aperture);
+
+        ImageView existedIcon = findViewById(R.id.imageViewIcon);
+        existedIcon.setImageResource(iconID);
+    }
+
+    private void setupButtonIcons() {
+        ImageView icon = findViewById(R.id.imageViewIcon);
+
+        ImageButton btnIconLensYellow = findViewById(R.id.buttonIconLensYellow);
+        btnIconLensYellow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                icon.setImageResource(R.drawable.icon_lens0);
+                iconID = R.drawable.icon_lens0;
+            }
+        });
+
+        ImageButton btnIconLensBlue = findViewById(R.id.buttonIconLensBlue);
+        btnIconLensBlue.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                icon.setImageResource(R.drawable.icon_lens1);
+                iconID = R.drawable.icon_lens1;
+            }
+        });
+
+        ImageButton btnIconLensRed = findViewById(R.id.buttonIconLensRed);
+        btnIconLensRed.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                icon.setImageResource(R.drawable.icon_lens2);
+                iconID = R.drawable.icon_lens2;
+            }
+        });
+
+        ImageButton btnIconLensBlack1 = findViewById(R.id.buttonIconLensBlack1);
+        btnIconLensBlack1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                icon.setImageResource(R.drawable.icon_lens3);
+                iconID = R.drawable.icon_lens3;
+            }
+        });
+
+        ImageButton btnIconLensBlack2 = findViewById(R.id.buttonIconLensBlack2);
+        btnIconLensBlack2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                icon.setImageResource(R.drawable.icon_lens4);
+                iconID = R.drawable.icon_lens4;
+            }
+        });
+
+        ImageButton btnIconLensBlack3 = findViewById(R.id.buttonIconLensBlack3);
+        btnIconLensBlack3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                icon.setImageResource(R.drawable.icon_lens5);
+                iconID = R.drawable.icon_lens5;
+            }
+        });
+
+        ImageButton btnIconPicture = findViewById(R.id.buttonIconPicture);
+        btnIconPicture.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                icon.setImageResource(R.drawable.icon_picture);
+                iconID = R.drawable.icon_picture;
+            }
+        });
     }
 
     private void setupButtonSave() {
@@ -99,6 +175,7 @@ public class LensDetailsActivity extends AppCompatActivity {
                     intent.putExtra(EXTRA_USER_MAKE, userMake);
                     intent.putExtra(EXTRA_USER_FOCAL_lENGTH, userFocalLength);
                     intent.putExtra(EXTRA_USER_APERTURE, userAperture);
+                    intent.putExtra(EXTRA_USER_ICON_ID, iconID);
 
                     setResult(Activity.RESULT_OK, intent);
                     finish();
