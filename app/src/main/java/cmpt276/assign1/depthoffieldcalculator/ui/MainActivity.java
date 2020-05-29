@@ -18,7 +18,9 @@ import android.widget.Toast;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
+import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 
 import cmpt276.assign1.depthoffieldcalculator.R;
 import cmpt276.assign1.depthoffieldcalculator.model.Lens;
@@ -36,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
     public static final int RESULT_CODE_CALCULATE_DOF = 43;
 
     private LensManager manager;
+    private ArrayList<Lens> lenses;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -62,14 +65,19 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void populateListView(){
-        ArrayAdapter<LensManager> adapter = new MyListAdapter();
+        lenses = new ArrayList<Lens>();
+        for(Lens l : manager){
+            lenses.add(l);
+        }
+
+        ArrayAdapter<Lens> adapter = new MyListAdapter();
         ListView list = findViewById(R.id.listViewLens);
         list.setAdapter(adapter);
     }
 
-    private class MyListAdapter extends ArrayAdapter<LensManager> {
+    private class MyListAdapter extends ArrayAdapter<Lens> {
         public MyListAdapter() {
-            super(MainActivity.this, R.layout.item_view_lens, Collections.singletonList(manager));
+            super(MainActivity.this, R.layout.item_view_lens, lenses);
         }
 
         @NonNull
@@ -80,7 +88,7 @@ public class MainActivity extends AppCompatActivity {
                 itemView = getLayoutInflater().inflate(R.layout.item_view_lens, parent, false);
             }
 
-            Lens currentLens = manager.getLens(position);
+            Lens currentLens = lenses.get(position);
 
             TextView makeText = itemView.findViewById(R.id.item_textViewMake);
             makeText.setText(currentLens.getMake());

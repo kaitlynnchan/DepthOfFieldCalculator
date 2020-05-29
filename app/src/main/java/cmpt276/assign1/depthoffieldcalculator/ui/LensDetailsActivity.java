@@ -46,19 +46,8 @@ public class LensDetailsActivity extends AppCompatActivity {
             setEditTexts(make, focalLength, aperture);
         }
 
-        setupButtonIcon();
         setupButtonSave();
         setupButtonCancel();
-    }
-
-    private void setupButtonIcon() {
-        ImageButton btnIcon = findViewById(R.id.imageButtonIcon);
-        btnIcon.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
     }
 
     private void setEditTexts(String make, int focalLength, double aperture) {

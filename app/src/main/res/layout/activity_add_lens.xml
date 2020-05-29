@@ -26,7 +26,7 @@
         android:layout_marginTop="16dp"
         android:text="@string/make"
         android:textSize="18sp"
-        app:layout_constraintStart_toEndOf="@+id/imageButtonIcon"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guideline" />
 
     <TextView
@@ -57,15 +57,16 @@
         android:id="@+id/editTextMake"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
-        android:layout_marginBottom="16dp"
         android:ems="10"
         android:hint="@string/ex_canon"
         android:inputType="textPersonName"
         app:layout_constraintBottom_toTopOf="@+id/guideline2"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/textView2" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
         android:id="@+id/editTextFocalLength"
@@ -81,7 +82,6 @@
         android:inputType="number"
         app:layout_constraintBottom_toTopOf="@+id/guideline3"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
@@ -98,19 +98,19 @@
         android:inputType="numberDecimal"
         app:layout_constraintBottom_toTopOf="@+id/guideline4"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/buttonSave"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
         android:text="@string/save"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guideline4" />
+        app:layout_constraintBottom_toTopOf="@+id/guideline"
+        app:layout_constraintEnd_toStartOf="@+id/buttonCancel"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.533" />
 
     <TextView
         android:id="@+id/textView5"
@@ -153,16 +153,80 @@
         app:layout_constraintGuide_percent="0.58" />
 
     <ImageButton
-        android:id="@+id/imageButtonIcon"
-        android:layout_width="?attr/listPreferredItemHeight"
-        android:layout_height="0dp"
+        android:id="@+id/buttonIconLensYellow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline4"
+        app:srcCompat="@drawable/icon_lens0" />
+
+    <ImageButton
+        android:id="@+id/buttonIconLensBlue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
         android:layout_marginTop="16dp"
-        android:layout_marginBottom="16dp"
-        android:src="@drawable/ic_add_a_photo_grey_24dp"
-        app:layout_constraintBottom_toTopOf="@+id/guideline2"
+        app:layout_constraintStart_toEndOf="@+id/buttonIconLensYellow"
+        app:layout_constraintTop_toTopOf="@+id/guideline4"
+        app:srcCompat="@drawable/icon_lens1" />
+
+    <ImageButton
+        android:id="@+id/buttonIconLensRed"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintStart_toEndOf="@+id/buttonIconLensBlue"
+        app:layout_constraintTop_toTopOf="@+id/guideline4"
+        app:srcCompat="@drawable/icon_lens2" />
+
+    <ImageButton
+        android:id="@+id/buttonIconLensBlack1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintStart_toEndOf="@+id/buttonIconLensRed"
+        app:layout_constraintTop_toTopOf="@+id/guideline4"
+        app:srcCompat="@drawable/icon_lens3" />
+
+    <ImageButton
+        android:id="@+id/buttonIconLensBlack2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginTop="16dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guideline" />
+        app:layout_constraintTop_toBottomOf="@+id/buttonIconLensYellow"
+        app:srcCompat="@drawable/icon_lens4" />
+
+    <ImageButton
+        android:id="@+id/buttonIconLensBlack3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintStart_toEndOf="@+id/buttonIconLensBlack2"
+        app:layout_constraintTop_toBottomOf="@+id/buttonIconLensBlue"
+        app:srcCompat="@drawable/icon_lens5" />
+
+    <ImageButton
+        android:id="@+id/buttonIconPicture"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintStart_toEndOf="@+id/buttonIconLensBlack3"
+        app:layout_constraintTop_toBottomOf="@+id/buttonIconLensRed"
+        app:srcCompat="@drawable/icon_lens6" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

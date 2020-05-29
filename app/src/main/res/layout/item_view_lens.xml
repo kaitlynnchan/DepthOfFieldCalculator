@@ -53,5 +53,5 @@
         android:id="@+id/item_imageViewIcon"
         android:layout_width="45dp"
         android:layout_height="45dp"
-        app:srcCompat="@drawable/image_icon" />
+        app:srcCompat="@drawable/icon_lens6" />
 </RelativeLayout>
