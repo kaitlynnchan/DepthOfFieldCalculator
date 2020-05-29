@@ -159,7 +159,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:layout_marginLeft="32dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="64dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guideline4"
         app:srcCompat="@drawable/icon_lens_yellow" />
@@ -170,7 +170,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="64dp"
         app:layout_constraintStart_toEndOf="@+id/buttonIconLensYellow"
         app:layout_constraintTop_toTopOf="@+id/guideline4"
         app:srcCompat="@drawable/icon_lens_blue" />
@@ -181,7 +181,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="64dp"
         app:layout_constraintStart_toEndOf="@+id/buttonIconLensBlue"
         app:layout_constraintTop_toTopOf="@+id/guideline4"
         app:srcCompat="@drawable/icon_lens_red" />
@@ -192,7 +192,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="64dp"
         app:layout_constraintStart_toEndOf="@+id/buttonIconLensRed"
         app:layout_constraintTop_toTopOf="@+id/guideline4"
         app:srcCompat="@drawable/icon_lens_black1" />
@@ -230,6 +230,17 @@
         app:layout_constraintTop_toBottomOf="@+id/buttonIconLensRed"
         app:srcCompat="@drawable/icon_picture" />
 
+    <ImageButton
+        android:id="@+id/buttonIconNoImage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintStart_toEndOf="@+id/buttonIconPicture"
+        app:layout_constraintTop_toBottomOf="@+id/buttonIconLensBlack1"
+        app:srcCompat="@drawable/icon_no_image" />
+
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline6"
         android:layout_width="wrap_content"
@@ -251,5 +262,26 @@
         app:layout_constraintTop_toTopOf="@+id/guideline"
         app:layout_constraintVertical_bias="0.0"
         app:srcCompat="@drawable/ic_add_a_photo_grey_24dp" />
+
+    <TextView
+        android:id="@+id/textView8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="16dp"
+        android:text="Icon"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline4" />
+
+    <TextView
+        android:id="@+id/textView10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Default"
+        app:layout_constraintEnd_toEndOf="@+id/buttonIconNoImage"
+        app:layout_constraintStart_toStartOf="@+id/buttonIconNoImage"
+        app:layout_constraintTop_toBottomOf="@+id/buttonIconNoImage" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

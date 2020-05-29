@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.media.Image;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -16,8 +17,9 @@ import android.widget.Toast;
 import cmpt276.assign1.depthoffieldcalculator.R;
 
 /**
- * Displays and allows user to input make, focal length, and aperture of lens
+ * Displays and allows user to input make, focal length, aperture of lens, and icon
  * Able to add or edit lens
+ * Sets a default icon if user does not choose one
  */
 public class LensDetailsActivity extends AppCompatActivity {
 
@@ -72,13 +74,15 @@ public class LensDetailsActivity extends AppCompatActivity {
 
     private void setupButtonIcons() {
         ImageView icon = findViewById(R.id.imageViewIcon);
+        iconID = R.drawable.ic_add_a_photo_grey_24dp;
 
         ImageButton btnIconLensYellow = findViewById(R.id.buttonIconLensYellow);
         btnIconLensYellow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                icon.setImageResource(R.drawable.icon_lens_yellow);
-                iconID = R.drawable.icon_lens_yellow;
+                // Select and deselect icon
+                checkButtonIcon(icon, R.drawable.icon_lens_yellow);
+
             }
         });
 
@@ -86,8 +90,8 @@ public class LensDetailsActivity extends AppCompatActivity {
         btnIconLensBlue.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                icon.setImageResource(R.drawable.icon_lens_blue);
-                iconID = R.drawable.icon_lens_blue;
+                // Select and deselect icon
+                checkButtonIcon(icon, R.drawable.icon_lens_blue);
             }
         });
 
@@ -95,8 +99,8 @@ public class LensDetailsActivity extends AppCompatActivity {
         btnIconLensRed.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                icon.setImageResource(R.drawable.icon_lens_red);
-                iconID = R.drawable.icon_lens_red;
+                // Select and deselect icon
+                checkButtonIcon(icon, R.drawable.icon_lens_red);
             }
         });
 
@@ -104,8 +108,8 @@ public class LensDetailsActivity extends AppCompatActivity {
         btnIconLensBlack1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                icon.setImageResource(R.drawable.icon_lens_black1);
-                iconID = R.drawable.icon_lens_black1;
+                // Select and deselect icon
+                checkButtonIcon(icon, R.drawable.icon_lens_black1);
             }
         });
 
@@ -113,8 +117,8 @@ public class LensDetailsActivity extends AppCompatActivity {
         btnIconLensBlack2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                icon.setImageResource(R.drawable.icon_lens_black2);
-                iconID = R.drawable.icon_lens_black2;
+                // Select and deselect icon
+                checkButtonIcon(icon, R.drawable.icon_lens_black2);
             }
         });
 
@@ -122,8 +126,8 @@ public class LensDetailsActivity extends AppCompatActivity {
         btnIconLensBlack3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                icon.setImageResource(R.drawable.icon_lens_black3);
-                iconID = R.drawable.icon_lens_black3;
+                // Select and deselect icon
+                checkButtonIcon(icon, R.drawable.icon_lens_black3);
             }
         });
 
@@ -131,10 +135,30 @@ public class LensDetailsActivity extends AppCompatActivity {
         btnIconPicture.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                icon.setImageResource(R.drawable.icon_picture);
-                iconID = R.drawable.icon_picture;
+                // Select and deselect icon
+                checkButtonIcon(icon, R.drawable.icon_picture);
             }
         });
+
+        ImageButton btnIconNoImage = findViewById(R.id.buttonIconNoImage);
+        btnIconNoImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Select and deselect icon
+                checkButtonIcon(icon, R.drawable.icon_no_image);
+            }
+        });
+    }
+
+    private void checkButtonIcon(ImageView icon, int drawableID){
+        if(iconID == drawableID){
+            iconID = R.drawable.ic_add_a_photo_grey_24dp;
+            icon.setImageResource(R.drawable.ic_add_a_photo_grey_24dp);
+        } else{
+            icon.setImageResource(drawableID);
+            iconID = drawableID;
+        }
+
     }
 
     private void setupButtonSave() {
@@ -164,6 +188,9 @@ public class LensDetailsActivity extends AppCompatActivity {
 
                 int userFocalLength = Integer.parseInt(userFocalLengthData);
                 double userAperture = Double.parseDouble(userApertureData);
+                if(iconID == R.drawable.ic_add_a_photo_grey_24dp){
+                    iconID = R.drawable.icon_no_image;
+                }
 
                 if(userAperture < 1.4){
                     Toast.makeText(LensDetailsActivity.this,
