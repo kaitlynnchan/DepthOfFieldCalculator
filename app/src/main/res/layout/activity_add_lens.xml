@@ -162,7 +162,7 @@
         android:layout_marginTop="16dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guideline4"
-        app:srcCompat="@drawable/icon_lens0" />
+        app:srcCompat="@drawable/icon_lens_yellow" />
 
     <ImageButton
         android:id="@+id/buttonIconLensBlue"
@@ -173,7 +173,7 @@
         android:layout_marginTop="16dp"
         app:layout_constraintStart_toEndOf="@+id/buttonIconLensYellow"
         app:layout_constraintTop_toTopOf="@+id/guideline4"
-        app:srcCompat="@drawable/icon_lens1" />
+        app:srcCompat="@drawable/icon_lens_blue" />
 
     <ImageButton
         android:id="@+id/buttonIconLensRed"
@@ -184,7 +184,7 @@
         android:layout_marginTop="16dp"
         app:layout_constraintStart_toEndOf="@+id/buttonIconLensBlue"
         app:layout_constraintTop_toTopOf="@+id/guideline4"
-        app:srcCompat="@drawable/icon_lens2" />
+        app:srcCompat="@drawable/icon_lens_red" />
 
     <ImageButton
         android:id="@+id/buttonIconLensBlack1"
@@ -195,7 +195,7 @@
         android:layout_marginTop="16dp"
         app:layout_constraintStart_toEndOf="@+id/buttonIconLensRed"
         app:layout_constraintTop_toTopOf="@+id/guideline4"
-        app:srcCompat="@drawable/icon_lens3" />
+        app:srcCompat="@drawable/icon_lens_black1" />
 
     <ImageButton
         android:id="@+id/buttonIconLensBlack2"
@@ -206,7 +206,7 @@
         android:layout_marginTop="16dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/buttonIconLensYellow"
-        app:srcCompat="@drawable/icon_lens4" />
+        app:srcCompat="@drawable/icon_lens_black2" />
 
     <ImageButton
         android:id="@+id/buttonIconLensBlack3"
@@ -217,7 +217,7 @@
         android:layout_marginTop="16dp"
         app:layout_constraintStart_toEndOf="@+id/buttonIconLensBlack2"
         app:layout_constraintTop_toBottomOf="@+id/buttonIconLensBlue"
-        app:srcCompat="@drawable/icon_lens5" />
+        app:srcCompat="@drawable/icon_lens_black3" />
 
     <ImageButton
         android:id="@+id/buttonIconPicture"

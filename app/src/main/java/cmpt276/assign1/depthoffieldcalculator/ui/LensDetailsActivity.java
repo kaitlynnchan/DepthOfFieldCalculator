@@ -77,8 +77,8 @@ public class LensDetailsActivity extends AppCompatActivity {
         btnIconLensYellow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                icon.setImageResource(R.drawable.icon_lens0);
-                iconID = R.drawable.icon_lens0;
+                icon.setImageResource(R.drawable.icon_lens_yellow);
+                iconID = R.drawable.icon_lens_yellow;
             }
         });
 
@@ -86,8 +86,8 @@ public class LensDetailsActivity extends AppCompatActivity {
         btnIconLensBlue.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                icon.setImageResource(R.drawable.icon_lens1);
-                iconID = R.drawable.icon_lens1;
+                icon.setImageResource(R.drawable.icon_lens_blue);
+                iconID = R.drawable.icon_lens_blue;
             }
         });
 
@@ -95,8 +95,8 @@ public class LensDetailsActivity extends AppCompatActivity {
         btnIconLensRed.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                icon.setImageResource(R.drawable.icon_lens2);
-                iconID = R.drawable.icon_lens2;
+                icon.setImageResource(R.drawable.icon_lens_red);
+                iconID = R.drawable.icon_lens_red;
             }
         });
 
@@ -104,8 +104,8 @@ public class LensDetailsActivity extends AppCompatActivity {
         btnIconLensBlack1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                icon.setImageResource(R.drawable.icon_lens3);
-                iconID = R.drawable.icon_lens3;
+                icon.setImageResource(R.drawable.icon_lens_black1);
+                iconID = R.drawable.icon_lens_black1;
             }
         });
 
@@ -113,8 +113,8 @@ public class LensDetailsActivity extends AppCompatActivity {
         btnIconLensBlack2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                icon.setImageResource(R.drawable.icon_lens4);
-                iconID = R.drawable.icon_lens4;
+                icon.setImageResource(R.drawable.icon_lens_black2);
+                iconID = R.drawable.icon_lens_black2;
             }
         });
 
@@ -122,8 +122,8 @@ public class LensDetailsActivity extends AppCompatActivity {
         btnIconLensBlack3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                icon.setImageResource(R.drawable.icon_lens5);
-                iconID = R.drawable.icon_lens5;
+                icon.setImageResource(R.drawable.icon_lens_black3);
+                iconID = R.drawable.icon_lens_black3;
             }
         });
 
