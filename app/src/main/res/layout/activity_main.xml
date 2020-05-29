@@ -57,7 +57,7 @@
         android:id="@+id/textView6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Optional features:\n2. Edit and Delete Lens\n3. Error Checking Input\n4. Auto-reccalculate\n6. Lens Icons"
+        android:text="Optional features:\n2. Edit and Delete Lens\n3. Error Checking Input\n4. Auto-reccalculate\n6. Lens Icons\n7. Empty State"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guidelineLower" />
 

@@ -65,10 +65,8 @@ public class MainActivity extends AppCompatActivity {
         ListView list = findViewById(R.id.listViewLens);
         list.setAdapter(adapter);
 
-        if(manager.getSize() <= 0){
-            list.setVisibility(View.INVISIBLE);
-            setupEmptyListView();
-        }
+        setupEmptyListView(list);
+
     }
 
     private class MyListAdapter extends ArrayAdapter<Lens> {
@@ -101,13 +99,21 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private void setupEmptyListView() {
+    private void setupEmptyListView(ListView list) {
         TextView text1 = findViewById(R.id.emptyList_text1);
-        text1.setVisibility(View.VISIBLE);
         TextView text2 = findViewById(R.id.emptyList_text2);
-        text2.setVisibility(View.VISIBLE);
         ImageView arrow = findViewById(R.id.emptyList_imageArrow);
-        arrow.setVisibility(View.VISIBLE);
+        if(manager.getSize() <= 0){
+            list.setVisibility(View.INVISIBLE);
+            text1.setVisibility(View.VISIBLE);
+            text2.setVisibility(View.VISIBLE);
+            arrow.setVisibility(View.VISIBLE);
+        } else{
+            list.setVisibility(View.VISIBLE);
+            text1.setVisibility(View.INVISIBLE);
+            text2.setVisibility(View.INVISIBLE);
+            arrow.setVisibility(View.INVISIBLE);
+        }
     }
 
     private void registerClickCallback() {
