@@ -261,7 +261,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guideline"
         app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@drawable/ic_add_a_photo_grey_24dp" />
+        app:srcCompat="@drawable/ic_add_a_photo_grey_24dp"
+        tools:ignore="VectorDrawableCompat" />
 
     <TextView
         android:id="@+id/textView8"
@@ -270,7 +271,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
         android:layout_marginTop="16dp"
-        android:text="Icon"
+        android:text="@string/icon"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guideline4" />

@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.media.Image;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -80,8 +79,7 @@ public class LensDetailsActivity extends AppCompatActivity {
         btnIconLensYellow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Select and deselect icon
-                checkButtonIcon(icon, R.drawable.icon_lens_yellow);
+                selectButtonIcon(icon, R.drawable.icon_lens_yellow);
 
             }
         });
@@ -90,8 +88,7 @@ public class LensDetailsActivity extends AppCompatActivity {
         btnIconLensBlue.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Select and deselect icon
-                checkButtonIcon(icon, R.drawable.icon_lens_blue);
+                selectButtonIcon(icon, R.drawable.icon_lens_blue);
             }
         });
 
@@ -99,8 +96,7 @@ public class LensDetailsActivity extends AppCompatActivity {
         btnIconLensRed.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Select and deselect icon
-                checkButtonIcon(icon, R.drawable.icon_lens_red);
+                selectButtonIcon(icon, R.drawable.icon_lens_red);
             }
         });
 
@@ -108,8 +104,7 @@ public class LensDetailsActivity extends AppCompatActivity {
         btnIconLensBlack1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Select and deselect icon
-                checkButtonIcon(icon, R.drawable.icon_lens_black1);
+                selectButtonIcon(icon, R.drawable.icon_lens_black1);
             }
         });
 
@@ -117,8 +112,7 @@ public class LensDetailsActivity extends AppCompatActivity {
         btnIconLensBlack2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Select and deselect icon
-                checkButtonIcon(icon, R.drawable.icon_lens_black2);
+                selectButtonIcon(icon, R.drawable.icon_lens_black2);
             }
         });
 
@@ -126,8 +120,7 @@ public class LensDetailsActivity extends AppCompatActivity {
         btnIconLensBlack3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Select and deselect icon
-                checkButtonIcon(icon, R.drawable.icon_lens_black3);
+                selectButtonIcon(icon, R.drawable.icon_lens_black3);
             }
         });
 
@@ -135,8 +128,7 @@ public class LensDetailsActivity extends AppCompatActivity {
         btnIconPicture.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Select and deselect icon
-                checkButtonIcon(icon, R.drawable.icon_picture);
+                selectButtonIcon(icon, R.drawable.icon_picture);
             }
         });
 
@@ -144,13 +136,13 @@ public class LensDetailsActivity extends AppCompatActivity {
         btnIconNoImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Select and deselect icon
-                checkButtonIcon(icon, R.drawable.icon_no_image);
+                selectButtonIcon(icon, R.drawable.icon_no_image);
             }
         });
     }
 
-    private void checkButtonIcon(ImageView icon, int drawableID){
+    private void selectButtonIcon(ImageView icon, int drawableID){
+        // Select and deselect icon
         if(iconID == drawableID){
             iconID = R.drawable.ic_add_a_photo_grey_24dp;
             icon.setImageResource(R.drawable.ic_add_a_photo_grey_24dp);
@@ -158,7 +150,6 @@ public class LensDetailsActivity extends AppCompatActivity {
             icon.setImageResource(drawableID);
             iconID = drawableID;
         }
-
     }
 
     private void setupButtonSave() {

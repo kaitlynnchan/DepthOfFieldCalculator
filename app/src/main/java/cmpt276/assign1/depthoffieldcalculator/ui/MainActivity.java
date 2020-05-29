@@ -64,6 +64,10 @@ public class MainActivity extends AppCompatActivity {
         ArrayAdapter<Lens> adapter = new MyListAdapter();
         ListView list = findViewById(R.id.listViewLens);
         list.setAdapter(adapter);
+
+        if(manager.getSize() <= 0){
+            setupEmptyListView();
+        }
     }
 
     private class MyListAdapter extends ArrayAdapter<Lens> {
@@ -94,6 +98,10 @@ public class MainActivity extends AppCompatActivity {
             icon.setImageResource(currentLens.getIconID());
             return itemView;
         }
+    }
+
+    private void setupEmptyListView() {
+
     }
 
     private void registerClickCallback() {
