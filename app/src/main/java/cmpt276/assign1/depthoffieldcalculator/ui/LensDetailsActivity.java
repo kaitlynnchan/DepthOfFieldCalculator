@@ -7,6 +7,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -33,7 +34,7 @@ public class LensDetailsActivity extends AppCompatActivity {
     public static final String EXTRA_USER_ICON_ID = "user icon ID";
 
     private static final String EXTRA_EXISTED = "existed lens";
-    private int iconID;
+    private int currentIconID;
 
     public static Intent makeLaunchIntent(Context context, Boolean existed){
         Intent intent = new Intent(context, LensDetailsActivity.class);
@@ -44,7 +45,7 @@ public class LensDetailsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_lens);
+        setContentView(R.layout.activity_lens_details);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -61,19 +62,73 @@ public class LensDetailsActivity extends AppCompatActivity {
             int focalLength = intent.getIntExtra(CalculateDepthOfFieldActivity.EXTRA_LENS_FOCAL_LENGTH, 0);
             double aperture = intent.getDoubleExtra(CalculateDepthOfFieldActivity.EXTRA_LENS_APERTURE, 0);
             int iconID = intent.getIntExtra(CalculateDepthOfFieldActivity.EXTRA_LENS_ICON_ID, 0);
+            currentIconID = iconID;
             setExistedParameters(make, focalLength, aperture, iconID);
         }
 
         setupButtonIcons();
-        setupButtonSave();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_lens_details, menu);
+        return super.onCreateOptionsMenu(menu);
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == android.R.id.home) {
-            Intent intent = new Intent();
-            setResult(Activity.RESULT_CANCELED, intent);
-            finish();
+        Intent intent = new Intent();
+
+        switch (item.getItemId()){
+            case android.R.id.home:
+                setResult(Activity.RESULT_CANCELED, intent);
+                finish();
+
+            case R.id.menu_itemSave:
+                EditText userMakeEntry = findViewById(R.id.editTextMake);
+                String userMake = userMakeEntry.getText().toString();
+
+                EditText userFocalLengthEntry = findViewById(R.id.editTextFocalLength);
+                String userFocalLengthData = userFocalLengthEntry.getText().toString();
+
+                EditText userApertureEntry = findViewById(R.id.editTextAperture);
+                String userApertureData = userApertureEntry.getText().toString();
+
+                if(userMake.isEmpty()
+                        || userFocalLengthData.isEmpty()
+                        || userApertureData.isEmpty())
+                {
+                    Toast.makeText(LensDetailsActivity.this,
+                            "Make, Focal length, and Aperture cannot be empty",
+                            Toast.LENGTH_LONG)
+                            .show();
+                    return false;
+                }
+
+                int userFocalLength = Integer.parseInt(userFocalLengthData);
+                double userAperture = Double.parseDouble(userApertureData);
+                if(currentIconID == R.drawable.ic_add_a_photo_grey_24dp){
+                    currentIconID = R.drawable.icon_no_image;
+                }
+
+                if(userAperture < 1.4){
+                    Toast.makeText(LensDetailsActivity.this,
+                            "Aperture cannot be less than 1.4",
+                            Toast.LENGTH_LONG)
+                            .show();
+                } else{
+                    intent.putExtra(EXTRA_USER_MAKE, userMake);
+                    intent.putExtra(EXTRA_USER_FOCAL_lENGTH, userFocalLength);
+                    intent.putExtra(EXTRA_USER_APERTURE, userAperture);
+                    intent.putExtra(EXTRA_USER_ICON_ID, currentIconID);
+
+                    setResult(Activity.RESULT_OK, intent);
+                    finish();
+                }
+
+            default:
+                assert false;
+
         }
         return super.onOptionsItemSelected(item);
     }
@@ -94,14 +149,15 @@ public class LensDetailsActivity extends AppCompatActivity {
 
     private void setupButtonIcons() {
         ImageView icon = findViewById(R.id.imageViewIcon);
-        iconID = R.drawable.ic_add_a_photo_grey_24dp;
+        if(currentIconID == 0){
+            currentIconID = R.drawable.ic_add_a_photo_grey_24dp;
+        }
 
         ImageButton btnIconLensYellow = findViewById(R.id.buttonIconLensYellow);
         btnIconLensYellow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 selectButtonIcon(icon, R.drawable.icon_lens_yellow);
-
             }
         });
 
@@ -164,63 +220,13 @@ public class LensDetailsActivity extends AppCompatActivity {
 
     private void selectButtonIcon(ImageView icon, int drawableID){
         // Select and deselect icon
-        if(iconID == drawableID){
-            iconID = R.drawable.ic_add_a_photo_grey_24dp;
+        if(currentIconID == drawableID){
+            currentIconID = R.drawable.ic_add_a_photo_grey_24dp;
             icon.setImageResource(R.drawable.ic_add_a_photo_grey_24dp);
         } else{
             icon.setImageResource(drawableID);
-            iconID = drawableID;
+            currentIconID = drawableID;
         }
     }
 
-    private void setupButtonSave() {
-        Button btnSave = findViewById(R.id.buttonSave);
-        btnSave.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                EditText userMakeEntry = findViewById(R.id.editTextMake);
-                String userMake = userMakeEntry.getText().toString();
-
-                EditText userFocalLengthEntry = findViewById(R.id.editTextFocalLength);
-                String userFocalLengthData = userFocalLengthEntry.getText().toString();
-
-                EditText userApertureEntry = findViewById(R.id.editTextAperture);
-                String userApertureData = userApertureEntry.getText().toString();
-
-                if(userMake.isEmpty()
-                        || userFocalLengthData.isEmpty()
-                        || userApertureData.isEmpty())
-                {
-                    Toast.makeText(LensDetailsActivity.this,
-                            "Make, Focal length, and Aperture cannot be empty",
-                            Toast.LENGTH_LONG)
-                            .show();
-                    return;
-                }
-
-                int userFocalLength = Integer.parseInt(userFocalLengthData);
-                double userAperture = Double.parseDouble(userApertureData);
-                if(iconID == R.drawable.ic_add_a_photo_grey_24dp){
-                    iconID = R.drawable.icon_no_image;
-                }
-
-                if(userAperture < 1.4){
-                    Toast.makeText(LensDetailsActivity.this,
-                            "Aperture cannot be less than 1.4",
-                            Toast.LENGTH_LONG)
-                            .show();
-                } else{
-                    Intent intent = new Intent();
-                    intent.putExtra(EXTRA_USER_MAKE, userMake);
-                    intent.putExtra(EXTRA_USER_FOCAL_lENGTH, userFocalLength);
-                    intent.putExtra(EXTRA_USER_APERTURE, userAperture);
-                    intent.putExtra(EXTRA_USER_ICON_ID, iconID);
-
-                    setResult(Activity.RESULT_OK, intent);
-                    finish();
-                }
-
-            }
-        });
-    }
 }

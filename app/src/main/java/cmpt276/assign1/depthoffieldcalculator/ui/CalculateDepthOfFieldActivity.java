@@ -79,7 +79,7 @@ public class CalculateDepthOfFieldActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == android.R.id.home) {
             Intent intent = new Intent();
-            setResult(Activity.RESULT_CANCELED, intent);
+            setResult(Activity.RESULT_OK, intent);
             finish();
         }
         return super.onOptionsItemSelected(item);
@@ -186,9 +186,6 @@ public class CalculateDepthOfFieldActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
 
         if(resultCode == Activity.RESULT_CANCELED){
-            String message = "Canceled";
-            Toast.makeText(CalculateDepthOfFieldActivity.this, message, Toast.LENGTH_LONG)
-                    .show();
             return;
         }
 

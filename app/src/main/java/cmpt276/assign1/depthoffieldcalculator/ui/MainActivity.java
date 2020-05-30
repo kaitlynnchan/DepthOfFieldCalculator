@@ -144,8 +144,6 @@ public class MainActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
 
         if(resultCode == Activity.RESULT_CANCELED){
-            String message = "Canceled";
-            Toast.makeText(MainActivity.this, message, Toast.LENGTH_LONG).show();
             return;
         }
 
