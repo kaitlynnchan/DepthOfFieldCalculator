@@ -2,6 +2,7 @@ package cmpt276.assign1.depthoffieldcalculator.ui;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.app.Activity;
 import android.content.Context;
@@ -49,6 +50,10 @@ public class CalculateDepthOfFieldActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calculate_depth_of_field);
+
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("Calculator");
 
         Intent intent = getIntent();
         int lensIndex = intent.getIntExtra(EXTRA_LENS_INDEX, 0);

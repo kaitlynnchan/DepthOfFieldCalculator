@@ -2,10 +2,13 @@ package cmpt276.assign1.depthoffieldcalculator.ui;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,6 +31,8 @@ import cmpt276.assign1.depthoffieldcalculator.model.LensManager;
  * Displays lens in a list View
  * Can add lens by the floating action button
  * Can click the lens in list
+ *
+ * Code for toolbar taken from: https://youtu.be/Fw6v7zFUjWU
  */
 public class MainActivity extends AppCompatActivity {
 
@@ -36,10 +41,14 @@ public class MainActivity extends AppCompatActivity {
 
     private LensManager manager;
 
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
 
         manager = LensManager.getInstance();
 

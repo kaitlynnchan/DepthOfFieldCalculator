@@ -20,7 +20,6 @@
     <string name="selected_aperture">Selected aperture</string>
     <string name="circle_of_confusion_m">Circle of Confusion [m]</string>
     <string name="distance_to_subject_m">Distance to subject [m]</string>
-    <string name="photo_details_with">Photo details with</string>
     <string name="edit_lens">Edit Lens</string>
     <string name="delete">Delete</string>
     <string name="icon">Icon</string>

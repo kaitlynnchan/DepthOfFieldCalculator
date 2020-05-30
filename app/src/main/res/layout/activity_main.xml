@@ -7,6 +7,11 @@
     android:layout_height="match_parent"
     tools:context=".ui.MainActivity">
 
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/toolbar"
+        tools:ignore="InvalidId" />
+
     <TextView
         android:id="@+id/textViewSelect"
         android:layout_width="wrap_content"
@@ -16,14 +21,14 @@
         android:text="@string/select_a_lens"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guidelineLower"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_end="100dp" />
+        app:layout_constraintGuide_end="117dp" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/buttonAdd"
@@ -43,7 +48,6 @@
         android:id="@+id/listViewLens"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:background="#FFFFFF"
         app:layout_constraintBottom_toTopOf="@+id/guidelineLower"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
