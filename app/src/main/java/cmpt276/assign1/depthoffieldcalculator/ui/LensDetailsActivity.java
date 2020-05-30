@@ -7,6 +7,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -20,6 +21,9 @@ import cmpt276.assign1.depthoffieldcalculator.R;
  * Displays and allows user to input make, focal length, aperture of lens, and icon
  * Able to add or edit lens
  * Sets a default icon if user does not choose one
+ *
+ * Code for toolbar back button taken from:
+ * https://stackoverflow.com/questions/26651602/display-back-arrow-on-toolbar
  */
 public class LensDetailsActivity extends AppCompatActivity {
 
@@ -45,6 +49,8 @@ public class LensDetailsActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Create Lens");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         Intent intent = getIntent();
         Boolean existed = intent.getBooleanExtra(EXTRA_EXISTED, false);
@@ -60,9 +66,17 @@ public class LensDetailsActivity extends AppCompatActivity {
 
         setupButtonIcons();
         setupButtonSave();
-        setupButtonCancel();
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            Intent intent = new Intent();
+            setResult(Activity.RESULT_CANCELED, intent);
+            finish();
+        }
+        return super.onOptionsItemSelected(item);
+    }
 
     private void setExistedParameters(String make, int focalLength, double aperture, int iconID) {
         EditText existedMake = findViewById(R.id.editTextMake);
@@ -209,18 +223,4 @@ public class LensDetailsActivity extends AppCompatActivity {
             }
         });
     }
-
-    private void setupButtonCancel() {
-        Button btnCancel = findViewById(R.id.buttonCancel);
-        btnCancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent();
-                setResult(Activity.RESULT_CANCELED, intent);
-                finish();
-            }
-        });
-    }
-
-
 }

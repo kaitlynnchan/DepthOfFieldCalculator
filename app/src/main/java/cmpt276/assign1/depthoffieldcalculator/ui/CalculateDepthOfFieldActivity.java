@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -25,6 +26,9 @@ import cmpt276.assign1.depthoffieldcalculator.model.LensManager;
  * Compute depth of field values for the selected Lens
  * Allows user to input circle of confusion, distance, and aperture
  * Able to edit and delete selected lens
+ *
+ * Code for toolbar back button taken from:
+ * https://stackoverflow.com/questions/26651602/display-back-arrow-on-toolbar
  */
 public class CalculateDepthOfFieldActivity extends AppCompatActivity {
 
@@ -54,6 +58,8 @@ public class CalculateDepthOfFieldActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Calculator");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         Intent intent = getIntent();
         int lensIndex = intent.getIntExtra(EXTRA_LENS_INDEX, 0);
@@ -67,6 +73,16 @@ public class CalculateDepthOfFieldActivity extends AppCompatActivity {
         setupAutoCalculate();
         setupButtonEdit();
         setupButtonDelete();
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            Intent intent = new Intent();
+            setResult(Activity.RESULT_CANCELED, intent);
+            finish();
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     private void setupAutoCalculate(){
