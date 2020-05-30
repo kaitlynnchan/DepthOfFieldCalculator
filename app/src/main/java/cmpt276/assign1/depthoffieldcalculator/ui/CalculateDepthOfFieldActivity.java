@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -71,17 +72,43 @@ public class CalculateDepthOfFieldActivity extends AppCompatActivity {
         lensText.setText(lens.toString());
 
         setupAutoCalculate();
-        setupButtonEdit();
-        setupButtonDelete();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_calculate_depth_of_field, menu);
+        return super.onCreateOptionsMenu(menu);
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == android.R.id.home) {
-            Intent intent = new Intent();
-            setResult(Activity.RESULT_OK, intent);
-            finish();
+        Intent intent;
+
+        switch (item.getItemId()){
+            case android.R.id.home:
+                intent = new Intent();
+                setResult(Activity.RESULT_OK, intent);
+                finish();
+                break;
+            case R.id.menu_itemEdit:
+                intent = LensDetailsActivity.makeLaunchIntent(
+                        CalculateDepthOfFieldActivity.this, true);
+                intent.putExtra(EXTRA_LENS_MAKE, lens.getMake());
+                intent.putExtra(EXTRA_LENS_FOCAL_LENGTH, lens.getFocalLength());
+                intent.putExtra(EXTRA_LENS_APERTURE, lens.getMaxAperture());
+                intent.putExtra(EXTRA_LENS_ICON_ID, lens.getIconID());
+                startActivityForResult(intent, RESULT_CODE_EDIT_LENS);
+                break;
+            case R.id.menu_itemDelete:
+                manager.remove(lens);
+                intent = new Intent();
+                setResult(Activity.RESULT_OK, intent);
+                finish();
+                break;
+            default:
+                assert false;
         }
+
         return super.onOptionsItemSelected(item);
     }
 
@@ -150,35 +177,6 @@ public class CalculateDepthOfFieldActivity extends AppCompatActivity {
             hyperFocalDistance.setText(doFCalculator.hyperFocalDistance() / 1000 + "m");
             depthOfField.setText(doFCalculator.depthOfField() / 1000 + "m");
         }
-    }
-
-    private void setupButtonEdit(){
-        Button btnEdit = findViewById(R.id.buttonEdit);
-        btnEdit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = LensDetailsActivity.makeLaunchIntent(
-                        CalculateDepthOfFieldActivity.this, true);
-                intent.putExtra(EXTRA_LENS_MAKE, lens.getMake());
-                intent.putExtra(EXTRA_LENS_FOCAL_LENGTH, lens.getFocalLength());
-                intent.putExtra(EXTRA_LENS_APERTURE, lens.getMaxAperture());
-                intent.putExtra(EXTRA_LENS_ICON_ID, lens.getIconID());
-                startActivityForResult(intent, RESULT_CODE_EDIT_LENS);
-            }
-        });
-    }
-
-    private void setupButtonDelete() {
-        Button btnDelete = findViewById(R.id.buttonDelete);
-        btnDelete.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                manager.remove(lens);
-                Intent intent = new Intent();
-                setResult(Activity.RESULT_OK, intent);
-                finish();
-            }
-        });
     }
 
     @Override

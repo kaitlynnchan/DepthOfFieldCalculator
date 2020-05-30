@@ -149,7 +149,6 @@ public class MainActivity extends AppCompatActivity {
 
         switch (requestCode){
             case RESULT_CODE_ADD_LENS:
-
                 // Unneeded snackbar
                 Snackbar.make(findViewById(R.id.myMainActivity),
                         "Added new lens",
@@ -166,7 +165,6 @@ public class MainActivity extends AppCompatActivity {
                 populateListView();
 
                 break;
-
             case RESULT_CODE_CALCULATE_DOF:
                 populateListView();
                 break;

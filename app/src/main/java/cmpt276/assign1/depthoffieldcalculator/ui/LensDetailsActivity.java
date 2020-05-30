@@ -83,7 +83,7 @@ public class LensDetailsActivity extends AppCompatActivity {
             case android.R.id.home:
                 setResult(Activity.RESULT_CANCELED, intent);
                 finish();
-
+                break;
             case R.id.menu_itemSave:
                 EditText userMakeEntry = findViewById(R.id.editTextMake);
                 String userMake = userMakeEntry.getText().toString();
@@ -102,7 +102,7 @@ public class LensDetailsActivity extends AppCompatActivity {
                             "Make, Focal length, and Aperture cannot be empty",
                             Toast.LENGTH_LONG)
                             .show();
-                    return false;
+                    break;
                 }
 
                 int userFocalLength = Integer.parseInt(userFocalLengthData);
@@ -125,7 +125,7 @@ public class LensDetailsActivity extends AppCompatActivity {
                     setResult(Activity.RESULT_OK, intent);
                     finish();
                 }
-
+                break;
             default:
                 assert false;
 
