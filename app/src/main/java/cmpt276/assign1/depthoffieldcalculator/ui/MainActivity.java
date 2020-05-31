@@ -59,7 +59,6 @@ public class MainActivity extends AppCompatActivity {
 
         manager = LensManager.getInstance();
         loadLensManager();
-
         populateListView();
         registerClickCallback();
 
@@ -69,15 +68,6 @@ public class MainActivity extends AppCompatActivity {
             startActivityForResult(intent, RESULT_CODE_ADD_LENS);
         });
 
-    }
-
-    private void saveLensManager(){
-        SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFERENCE, MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        Gson gson = new Gson();
-        String json = gson.toJson(manager.getLenses());
-        editor.putString(EDITOR_LENS_LIST, json);
-        editor.apply();
     }
 
     private void loadLensManager(){
@@ -140,19 +130,25 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    private void saveLensManager(){
+        SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFERENCE, MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        Gson gson = new Gson();
+        String json = gson.toJson(manager.getLenses());
+        editor.putString(EDITOR_LENS_LIST, json);
+        editor.apply();
+    }
+
     private void setupEmptyListView(ListView list) {
         TextView text1 = findViewById(R.id.emptyList_text1);
-        TextView text2 = findViewById(R.id.emptyList_text2);
         ImageView arrow = findViewById(R.id.emptyList_imageArrow);
         if(manager.getSize() <= 0){
             list.setVisibility(View.INVISIBLE);
             text1.setVisibility(View.VISIBLE);
-            text2.setVisibility(View.VISIBLE);
             arrow.setVisibility(View.VISIBLE);
         } else{
             list.setVisibility(View.VISIBLE);
             text1.setVisibility(View.INVISIBLE);
-            text2.setVisibility(View.INVISIBLE);
             arrow.setVisibility(View.INVISIBLE);
         }
     }
@@ -181,11 +177,9 @@ public class MainActivity extends AppCompatActivity {
 
         switch (requestCode){
             case RESULT_CODE_ADD_LENS:
-                // Unneeded snackbar
                 Snackbar.make(findViewById(R.id.myMainActivity),
                         "Added new lens",
-                        Snackbar.LENGTH_LONG)
-                        .setAction("Action", null)
+                        Snackbar.LENGTH_SHORT)
                         .show();
 
                 String make = data.getStringExtra(LensDetailsActivity.EXTRA_USER_MAKE);

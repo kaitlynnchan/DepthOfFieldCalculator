@@ -28,7 +28,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_end="125dp" />
+        app:layout_constraintGuide_end="88dp" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/buttonAdd"
@@ -61,7 +61,14 @@
         android:id="@+id/textView6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Optional features:\n2. Edit and Delete Lens\n3. Error Checking Input\n4. Auto-reccalculate\n6. Lens Icons\n7. Empty State\n1. App Bar Buttons via Toolbar"
+        android:text="Optional features:\n
+2. Edit and Delete Lens         7. Empty State\n
+3. Error Checking Input         1. App Bar Buttons\n
+4. Auto-reccalculate              5. Save Data\n
+6. Lens Icons"
+
+
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guidelineLower" />
 
@@ -72,7 +79,7 @@
         android:visibility="invisible"
         app:layout_constraintBottom_toTopOf="@+id/buttonAdd"
         app:layout_constraintEnd_toEndOf="@+id/buttonAdd"
-        app:layout_constraintStart_toEndOf="@+id/textView6"
+        app:layout_constraintStart_toStartOf="@+id/emptyList_text1"
         app:layout_constraintTop_toBottomOf="@+id/emptyList_text1"
         app:srcCompat="@drawable/arrow_drawn" />
 
@@ -81,23 +88,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
-        android:text="There are currently no lens\nAdd a new lens"
+        android:text="There are currently no lens\nClick the + to add a new lens"
         android:textSize="18sp"
         android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/emptyList_text2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Click here"
-        android:textSize="18sp"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toTopOf="@+id/buttonAdd"
-        app:layout_constraintEnd_toEndOf="@+id/buttonAdd"
-        app:layout_constraintStart_toStartOf="@+id/buttonAdd" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
