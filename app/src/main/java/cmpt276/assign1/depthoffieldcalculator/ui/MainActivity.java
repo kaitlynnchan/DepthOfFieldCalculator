@@ -8,6 +8,7 @@ import androidx.appcompat.widget.Toolbar;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
@@ -17,10 +18,14 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import java.lang.reflect.Type;
+import java.util.List;
 
 import cmpt276.assign1.depthoffieldcalculator.R;
 import cmpt276.assign1.depthoffieldcalculator.model.Lens;
@@ -38,6 +43,8 @@ public class MainActivity extends AppCompatActivity {
 
     public static final int RESULT_CODE_ADD_LENS = 42;
     public static final int RESULT_CODE_CALCULATE_DOF = 43;
+    public static final String SHARED_PREFERENCE = "shared preference";
+    public static final String EDITOR_LENS_LIST = "lens manager";
 
     private LensManager manager;
 
@@ -51,8 +58,8 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         manager = LensManager.getInstance();
+        loadLensManager();
 
-        populateLensManager();
         populateListView();
         registerClickCallback();
 
@@ -61,6 +68,30 @@ public class MainActivity extends AppCompatActivity {
             Intent intent = LensDetailsActivity.makeLaunchIntent(MainActivity.this, false);
             startActivityForResult(intent, RESULT_CODE_ADD_LENS);
         });
+
+    }
+
+    private void saveLensManager(){
+        SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFERENCE, MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        Gson gson = new Gson();
+        String json = gson.toJson(manager.getLenses());
+        editor.putString(EDITOR_LENS_LIST, json);
+        editor.apply();
+    }
+
+    private void loadLensManager(){
+        SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFERENCE, MODE_PRIVATE);
+        String json = sharedPreferences.getString(EDITOR_LENS_LIST, null);
+        Type type = new TypeToken<List<Lens>>() {}.getType();
+        Gson gson = new Gson();
+        List<Lens> lensListShared = gson.fromJson(json, type);
+
+        if(lensListShared == null || lensListShared.size() <= 0){
+            populateLensManager();
+        } else{
+            manager.setLenses(lensListShared);
+        }
     }
 
     private void populateLensManager(){
@@ -74,6 +105,7 @@ public class MainActivity extends AppCompatActivity {
         ListView list = findViewById(R.id.listViewLens);
         list.setAdapter(adapter);
 
+        saveLensManager();
         setupEmptyListView(list);
 
     }
@@ -163,7 +195,6 @@ public class MainActivity extends AppCompatActivity {
 
                 manager.add(new Lens(make, aperture, focalLength, iconID));
                 populateListView();
-
                 break;
             case RESULT_CODE_CALCULATE_DOF:
                 populateListView();
