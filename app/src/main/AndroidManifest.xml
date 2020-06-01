@@ -9,9 +9,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.CalculateDepthOfFieldActivity"></activity>
-        <activity android:name=".ui.LensDetailsActivity" />
-        <activity android:name=".ui.MainActivity">
+        <activity android:name=".ui.CalculateDepthOfFieldActivity"
+            android:label="@string/activity_calculate_depth_of_field_name">
+        </activity>
+        <activity android:name=".ui.LensDetailsActivity"
+            android:label="@string/activity_lens_details_name"/>
+        <activity android:name=".ui.MainActivity"
+            android:label="@string/activity_main_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

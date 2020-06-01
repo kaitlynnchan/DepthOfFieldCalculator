@@ -90,7 +90,7 @@
         android:layout_marginBottom="16dp"
         android:ems="10"
         android:hint="@string/ex_2_8_for_f2_8"
-        android:inputType="numberDecimal"
+        android:inputType="number|numberDecimal"
         app:layout_constraintBottom_toTopOf="@+id/guideline4"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

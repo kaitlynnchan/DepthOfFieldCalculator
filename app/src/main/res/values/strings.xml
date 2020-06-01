@@ -1,5 +1,8 @@
 <resources>
     <string name="app_name">Depth Of Field Calculator</string>
+    <string name="activity_main_name">Depth Of Field Calculator</string>
+    <string name="activity_lens_details_name">Lens Details</string>
+    <string name="activity_calculate_depth_of_field_name">Calculator</string>
     <string name="select_a_lens">Select a lens:</string>
     <string name="make">Make</string>
     <string name="focal_length_mm">Focal Length [mm]</string>

@@ -12,11 +12,8 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import cmpt276.assign1.depthoffieldcalculator.R;
 import cmpt276.assign1.depthoffieldcalculator.model.DepthOfFieldCalculator;
@@ -39,8 +36,8 @@ public class CalculateDepthOfFieldActivity extends AppCompatActivity {
     public static final String EXTRA_LENS_APERTURE = "lens aperture";
     public static final String EXTRA_LENS_ICON_ID = "lens icon ID";
 
-    private static final String EXTRA_LENS_INDEX = "extra lens index";
-    private static final String INVALID_APERTURE = "Invalid aperture";
+    private static final String EXTRA_LENS_INDEX = "lens index";
+    private static final String INVALID_APERTURE = "invalid aperture";
     private LensManager manager;
     private Lens lens;
     private TextView lensText;
@@ -58,7 +55,6 @@ public class CalculateDepthOfFieldActivity extends AppCompatActivity {
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("Calculator");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
@@ -66,7 +62,7 @@ public class CalculateDepthOfFieldActivity extends AppCompatActivity {
         int lensIndex = intent.getIntExtra(EXTRA_LENS_INDEX, 0);
 
         manager = LensManager.getInstance();
-        lens = manager.getLens(lensIndex);
+        lens = manager.get(lensIndex);
 
         lensText = findViewById(R.id.textViewLens);
         lensText.setText(lens.toString());
@@ -74,46 +70,7 @@ public class CalculateDepthOfFieldActivity extends AppCompatActivity {
         setupAutoCalculate();
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_calculate_depth_of_field, menu);
-        return super.onCreateOptionsMenu(menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        Intent intent;
-
-        switch (item.getItemId()){
-            case android.R.id.home:
-                intent = new Intent();
-                setResult(Activity.RESULT_OK, intent);
-                finish();
-                break;
-            case R.id.menu_itemEdit:
-                intent = LensDetailsActivity.makeLaunchIntent(
-                        CalculateDepthOfFieldActivity.this, true);
-                intent.putExtra(EXTRA_LENS_MAKE, lens.getMake());
-                intent.putExtra(EXTRA_LENS_FOCAL_LENGTH, lens.getFocalLength());
-                intent.putExtra(EXTRA_LENS_APERTURE, lens.getMaxAperture());
-                intent.putExtra(EXTRA_LENS_ICON_ID, lens.getIconID());
-                startActivityForResult(intent, RESULT_CODE_EDIT_LENS);
-                break;
-            case R.id.menu_itemDelete:
-                manager.remove(lens);
-                intent = new Intent();
-                setResult(Activity.RESULT_OK, intent);
-                finish();
-                break;
-            default:
-                assert false;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
-
     private void setupAutoCalculate(){
-
         EditText userCOCEntry = findViewById(R.id.editTextCOC);
         EditText userDistanceEntry = findViewById(R.id.editTextDistance);
         EditText userApertureEntry = findViewById(R.id.editTextAperture);
@@ -168,8 +125,7 @@ public class CalculateDepthOfFieldActivity extends AppCompatActivity {
             hyperFocalDistance.setText(INVALID_APERTURE);
         } else{
             DepthOfFieldCalculator doFCalculator = new DepthOfFieldCalculator(
-                    lens, userAperture, userDistance, userCOC
-            );
+                    lens, userAperture, userDistance, userCOC);
 
             // Divide distances by 1000 to convert units from mm to m
             nearFocalDistance.setText(doFCalculator.nearFocalPoint() / 1000 + "m");
@@ -212,5 +168,51 @@ public class CalculateDepthOfFieldActivity extends AppCompatActivity {
             default:
                 assert false;
         }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_calculate_depth_of_field, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        Intent intent;
+
+        switch (item.getItemId()){
+            case android.R.id.home:
+                intent = new Intent();
+                setResult(Activity.RESULT_OK, intent);
+                finish();
+                break;
+            case R.id.menu_itemEdit:
+                intent = LensDetailsActivity.makeLaunchIntent(
+                        CalculateDepthOfFieldActivity.this, true);
+                intent.putExtra(EXTRA_LENS_MAKE, lens.getMake());
+                intent.putExtra(EXTRA_LENS_FOCAL_LENGTH, lens.getFocalLength());
+                intent.putExtra(EXTRA_LENS_APERTURE, lens.getMaxAperture());
+                intent.putExtra(EXTRA_LENS_ICON_ID, lens.getIconID());
+                startActivityForResult(intent, RESULT_CODE_EDIT_LENS);
+                break;
+            case R.id.menu_itemDelete:
+                manager.remove(lens);
+                intent = new Intent();
+                setResult(Activity.RESULT_OK, intent);
+                finish();
+                break;
+            default:
+                assert false;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent();
+        setResult(Activity.RESULT_OK, intent);
+        finish();
+        super.onBackPressed();
     }
 }

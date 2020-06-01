@@ -58,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         manager = LensManager.getInstance();
-        loadLensManager();
+        loadSharedPreferences();
         populateListView();
         registerClickCallback();
 
@@ -70,7 +70,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private void loadLensManager(){
+    private void loadSharedPreferences(){
         SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFERENCE, MODE_PRIVATE);
         String json = sharedPreferences.getString(EDITOR_LENS_LIST, null);
         Type type = new TypeToken<List<Lens>>() {}.getType();
@@ -95,7 +95,7 @@ public class MainActivity extends AppCompatActivity {
         ListView list = findViewById(R.id.listViewLens);
         list.setAdapter(adapter);
 
-        saveLensManager();
+        saveSharedPreferences();
         setupEmptyListView(list);
 
     }
@@ -107,13 +107,13 @@ public class MainActivity extends AppCompatActivity {
 
         @NonNull
         @Override
-        public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+        public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent){
             View itemView = convertView;
             if(itemView == null){
                 itemView = getLayoutInflater().inflate(R.layout.item_view_lens, parent, false);
             }
 
-            Lens currentLens = manager.getLens(position);
+            Lens currentLens = manager.get(position);
 
             TextView makeText = itemView.findViewById(R.id.item_textViewMake);
             makeText.setText(currentLens.getMake());
@@ -126,11 +126,12 @@ public class MainActivity extends AppCompatActivity {
 
             ImageView icon = itemView.findViewById(R.id.item_imageViewIcon);
             icon.setImageResource(currentLens.getIconID());
+
             return itemView;
         }
     }
 
-    private void saveLensManager(){
+    private void saveSharedPreferences(){
         SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFERENCE, MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         Gson gson = new Gson();
@@ -159,9 +160,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = CalculateDepthOfFieldActivity.makeLaunchIntent(
-                        MainActivity.this,
-                        position
-                );
+                        MainActivity.this, position);
                 startActivityForResult(intent, RESULT_CODE_CALCULATE_DOF);
             }
         });
