@@ -22,6 +22,10 @@ public class LensManager implements Iterable<Lens>{
         return instance;
     }
 
+    public List<Lens> getLenses() {
+        return lenses;
+    }
+
     public int getSize() {
         return lenses.size();
     }
@@ -30,8 +34,8 @@ public class LensManager implements Iterable<Lens>{
         return lenses.get(indx);
     }
 
-    public List<Lens> getLenses() {
-        return lenses;
+    public void setLenses(List<Lens> lenses) {
+        this.lenses = lenses;
     }
 
     public void add(Lens lens){
@@ -40,10 +44,6 @@ public class LensManager implements Iterable<Lens>{
 
     public void remove(Lens lens){
         lenses.remove(lens);
-    }
-
-    public void setLenses(List<Lens> lenses) {
-        this.lenses = lenses;
     }
 
     @Override

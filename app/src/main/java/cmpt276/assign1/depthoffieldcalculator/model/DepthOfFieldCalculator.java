@@ -40,10 +40,10 @@ public class DepthOfFieldCalculator {
         return farFocalPoint() - nearFocalPoint();
     }
 
-    @Override
-    public String toString() {
-        return "\tIn focus: " + nearFocalPoint() + "m to " + farFocalPoint()
-                + "m [DoF = " + depthOfField() + "m]"
-                + "\n\tHyperfocal point: " + hyperFocalDistance() + "m";
-    }
+//    @Override
+//    public String toString() {
+//        return "\tIn focus: " + nearFocalPoint() + "m to " + farFocalPoint()
+//                + "m [DoF = " + depthOfField() + "m]"
+//                + "\n\tHyperfocal point: " + hyperFocalDistance() + "m";
+//    }
 }

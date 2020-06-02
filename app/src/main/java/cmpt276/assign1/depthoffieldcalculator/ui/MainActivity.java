@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
-    protected void onCreate(Bundle savedInstanceState){
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -85,9 +85,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void populateLensManager(){
-        manager.add(new Lens("Nikkor", 2.8, 24, R.drawable.icon_picture));
-        manager.add(new Lens("Sony", 1.8, 35, R.drawable.icon_picture));
-        manager.add(new Lens("Canon", 3.5, 80, R.drawable.icon_picture));
+        manager.add(new Lens("Canon", 1.8, 50, R.drawable.icon_picture));
+        manager.add(new Lens("Tamron", 2.8, 90, R.drawable.icon_picture));
+        manager.add(new Lens("Sigma", 2.8, 200, R.drawable.icon_picture));
+        manager.add(new Lens("Nikon", 4.0, 200, R.drawable.icon_picture));
     }
 
     private void populateListView(){
@@ -97,17 +98,16 @@ public class MainActivity extends AppCompatActivity {
 
         saveSharedPreferences();
         setupEmptyListView(list);
-
     }
 
-    private class MyListAdapter extends ArrayAdapter<Lens> {
+    private class MyListAdapter extends ArrayAdapter<Lens>{
         public MyListAdapter() {
             super(MainActivity.this, R.layout.item_view_lens, manager.getLenses());
         }
 
         @NonNull
         @Override
-        public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent){
+        public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
             View itemView = convertView;
             if(itemView == null){
                 itemView = getLayoutInflater().inflate(R.layout.item_view_lens, parent, false);

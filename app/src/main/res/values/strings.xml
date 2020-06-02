@@ -21,7 +21,7 @@
     <string name="lens">Lens</string>
     <string name="ex_1_5_for_1_5m">ex: 1.5 for 1.5m</string>
     <string name="selected_aperture">Selected aperture</string>
-    <string name="circle_of_confusion_m">Circle of Confusion [m]</string>
+    <string name="circle_of_confusion_m">Circle of Confusion [mm]</string>
     <string name="distance_to_subject_m">Distance to subject [m]</string>
     <string name="edit_lens">Edit Lens</string>
     <string name="delete">Delete</string>

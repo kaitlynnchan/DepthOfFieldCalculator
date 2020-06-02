@@ -41,7 +41,7 @@ public class LensDetailsActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState){
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lens_details);
 
@@ -67,7 +67,7 @@ public class LensDetailsActivity extends AppCompatActivity {
         setupButtonIcons();
     }
 
-    private void setExistedParameters(String make, int focalLength, double aperture, int iconID) {
+    private void setExistedParameters(String make, int focalLength, double aperture, int iconID){
         EditText existedMake = findViewById(R.id.editTextMake);
         existedMake.setText(make);
 
@@ -81,7 +81,7 @@ public class LensDetailsActivity extends AppCompatActivity {
         existedIcon.setImageResource(iconID);
     }
 
-    private void setupButtonIcons() {
+    private void setupButtonIcons(){
         ImageView icon = findViewById(R.id.imageViewIcon);
         if(currentIconID == 0){
             currentIconID = R.drawable.ic_add_a_photo_grey_24dp;
@@ -124,13 +124,13 @@ public class LensDetailsActivity extends AppCompatActivity {
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu){
+    public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_lens_details, menu);
         return super.onCreateOptionsMenu(menu);
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item){
+    public boolean onOptionsItemSelected(MenuItem item) {
         Intent intent = new Intent();
 
         switch (item.getItemId()){

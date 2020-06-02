@@ -12,8 +12,11 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import java.text.DecimalFormat;
 
 import cmpt276.assign1.depthoffieldcalculator.R;
 import cmpt276.assign1.depthoffieldcalculator.model.DepthOfFieldCalculator;
@@ -37,7 +40,7 @@ public class CalculateDepthOfFieldActivity extends AppCompatActivity {
     public static final String EXTRA_LENS_ICON_ID = "lens icon ID";
 
     private static final String EXTRA_LENS_INDEX = "lens index";
-    private static final String INVALID_APERTURE = "invalid aperture";
+    private static final String INVALID_APERTURE = "Invalid aperture";
     private LensManager manager;
     private Lens lens;
     private TextView lensText;
@@ -109,7 +112,6 @@ public class CalculateDepthOfFieldActivity extends AppCompatActivity {
         userCOCEntry.addTextChangedListener(watcher);
         userDistanceEntry.addTextChangedListener(watcher);
         userApertureEntry.addTextChangedListener(watcher);
-
     }
 
     private void calculateDepthOfField(double userCOC, double userDistance, double userAperture){
@@ -128,11 +130,20 @@ public class CalculateDepthOfFieldActivity extends AppCompatActivity {
                     lens, userAperture, userDistance, userCOC);
 
             // Divide distances by 1000 to convert units from mm to m
-            nearFocalDistance.setText(doFCalculator.nearFocalPoint() / 1000 + "m");
-            farFocalDistance.setText(doFCalculator.farFocalPoint() / 1000 + "m");
-            hyperFocalDistance.setText(doFCalculator.hyperFocalDistance() / 1000 + "m");
-            depthOfField.setText(doFCalculator.depthOfField() / 1000 + "m");
+            nearFocalDistance.setText(formatM(doFCalculator.nearFocalPoint() / 1000));
+            farFocalDistance.setText(formatM(doFCalculator.farFocalPoint() / 1000));
+            hyperFocalDistance.setText(formatM(doFCalculator.hyperFocalDistance() / 1000));
+            depthOfField.setText(formatM(doFCalculator.depthOfField() / 1000));
         }
+    }
+
+    private String formatM(double distanceInM) {
+        if(distanceInM == Double.POSITIVE_INFINITY){
+            // Concatenate "" to convert distanceInM to a string
+            return distanceInM + "";
+        }
+        DecimalFormat df = new DecimalFormat("0.00");
+        return df.format(distanceInM) + "m";
     }
 
     @Override
