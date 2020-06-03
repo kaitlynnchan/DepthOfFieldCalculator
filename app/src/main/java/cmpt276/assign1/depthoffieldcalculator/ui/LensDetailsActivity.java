@@ -20,14 +20,11 @@ import cmpt276.assign1.depthoffieldcalculator.R;
  * Displays and allows user to input make, focal length, aperture of lens, and icon
  * Able to add or edit lens
  * Sets a default icon if user does not choose one
- *
- * Code for toolbar back button taken from:
- * https://stackoverflow.com/questions/26651602/display-back-arrow-on-toolbar
  */
 public class LensDetailsActivity extends AppCompatActivity {
 
     public static final String EXTRA_USER_MAKE = "user make";
-    public static final String EXTRA_USER_FOCAL_lENGTH = "user focal length";
+    public static final String EXTRA_USER_FOCAL_LENGTH = "user focal length";
     public static final String EXTRA_USER_APERTURE = "user aperture";
     public static final String EXTRA_USER_ICON_ID = "user icon ID";
 
@@ -61,6 +58,7 @@ public class LensDetailsActivity extends AppCompatActivity {
             double aperture = intent.getDoubleExtra(CalculateDepthOfFieldActivity.EXTRA_LENS_APERTURE, 0);
             int iconID = intent.getIntExtra(CalculateDepthOfFieldActivity.EXTRA_LENS_ICON_ID, 0);
             currentIconID = iconID;
+
             setExistedParameters(make, focalLength, aperture, iconID);
         }
 
@@ -157,9 +155,10 @@ public class LensDetailsActivity extends AppCompatActivity {
                             Toast.LENGTH_LONG)
                             .show();
                 } else{
-                    int userFocalLength = Integer.parseInt(userFocalLengthData);
-                    double userAperture = Double.parseDouble(userApertureData);    // [mm]
-                    if(currentIconID == R.drawable.ic_add_a_photo_grey_24dp){
+                    int userFocalLength = Integer.parseInt(userFocalLengthData);    // [mm]
+                    double userAperture = Double.parseDouble(userApertureData);
+                    // Insure that the lens' icon has a proper image
+                    if(currentIconID == R.drawable.icon_no_image2){
                         currentIconID = R.drawable.icon_no_image;
                     }
 
@@ -170,7 +169,7 @@ public class LensDetailsActivity extends AppCompatActivity {
                                 .show();
                     } else{
                         intent.putExtra(EXTRA_USER_MAKE, userMake);
-                        intent.putExtra(EXTRA_USER_FOCAL_lENGTH, userFocalLength);
+                        intent.putExtra(EXTRA_USER_FOCAL_LENGTH, userFocalLength);
                         intent.putExtra(EXTRA_USER_APERTURE, userAperture);
                         intent.putExtra(EXTRA_USER_ICON_ID, currentIconID);
 
@@ -183,6 +182,7 @@ public class LensDetailsActivity extends AppCompatActivity {
                 assert false;
 
         }
+
         return super.onOptionsItemSelected(item);
     }
 

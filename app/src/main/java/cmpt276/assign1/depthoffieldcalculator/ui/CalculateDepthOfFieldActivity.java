@@ -12,7 +12,6 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -27,9 +26,6 @@ import cmpt276.assign1.depthoffieldcalculator.model.LensManager;
  * Compute depth of field values for the selected Lens
  * Allows user to input circle of confusion, distance, and aperture
  * Able to edit and delete selected lens
- *
- * Code for toolbar back button taken from:
- * https://stackoverflow.com/questions/26651602/display-back-arrow-on-toolbar
  */
 public class CalculateDepthOfFieldActivity extends AppCompatActivity {
 
@@ -126,6 +122,7 @@ public class CalculateDepthOfFieldActivity extends AppCompatActivity {
             depthOfField.setText(INVALID_APERTURE);
             hyperFocalDistance.setText(INVALID_APERTURE);
         } else{
+            // depthOfFieldCalculator (lens, aperture, distance [mm], circle of confusion [mm])
             DepthOfFieldCalculator doFCalculator = new DepthOfFieldCalculator(
                     lens, userAperture, userDistance, userCOC);
 
@@ -157,7 +154,7 @@ public class CalculateDepthOfFieldActivity extends AppCompatActivity {
         switch (requestCode){
             case RESULT_CODE_EDIT_LENS:
                 String userMake = data.getStringExtra(LensDetailsActivity.EXTRA_USER_MAKE);
-                int userFocalLength = data.getIntExtra(LensDetailsActivity.EXTRA_USER_FOCAL_lENGTH, 0);    // [mm]
+                int userFocalLength = data.getIntExtra(LensDetailsActivity.EXTRA_USER_FOCAL_LENGTH, 0);    // [mm]
                 double userAperture = data.getDoubleExtra(LensDetailsActivity.EXTRA_USER_APERTURE, 0);
                 int userIconID = data.getIntExtra(LensDetailsActivity.EXTRA_USER_ICON_ID, 0);
 

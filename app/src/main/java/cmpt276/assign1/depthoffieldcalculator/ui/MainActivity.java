@@ -36,8 +36,6 @@ import cmpt276.assign1.depthoffieldcalculator.model.LensManager;
  * Displays lens in a list View
  * Can add lens by the floating action button
  * Can click the lens in list
- *
- * Code for toolbar taken from: https://youtu.be/Fw6v7zFUjWU
  */
 public class MainActivity extends AppCompatActivity {
 
@@ -71,6 +69,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void loadSharedPreferences(){
+        // Code inspired by: https://codinginflow.com/tutorials/android/save-arraylist-to-sharedpreferences-with-gson
         SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFERENCE, MODE_PRIVATE);
         String json = sharedPreferences.getString(EDITOR_LENS_LIST, null);
         Type type = new TypeToken<List<Lens>>() {}.getType();
@@ -85,6 +84,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void populateLensManager(){
+        // Lens(make, maxAperture, focalLength [mm], iconID)
         manager.add(new Lens("Canon", 1.8, 50, R.drawable.icon_picture));
         manager.add(new Lens("Tamron", 2.8, 90, R.drawable.icon_picture));
         manager.add(new Lens("Sigma", 2.8, 200, R.drawable.icon_picture));
@@ -132,6 +132,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void saveSharedPreferences(){
+        // Code taken from: https://codinginflow.com/tutorials/android/save-arraylist-to-sharedpreferences-with-gson
         SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFERENCE, MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         Gson gson = new Gson();
@@ -182,10 +183,11 @@ public class MainActivity extends AppCompatActivity {
                         .show();
 
                 String make = data.getStringExtra(LensDetailsActivity.EXTRA_USER_MAKE);
-                int focalLength = data.getIntExtra(LensDetailsActivity.EXTRA_USER_FOCAL_lENGTH, 0);    // [mm]
+                int focalLength = data.getIntExtra(LensDetailsActivity.EXTRA_USER_FOCAL_LENGTH, 0);    // [mm]
                 double aperture = data.getDoubleExtra(LensDetailsActivity.EXTRA_USER_APERTURE, 0);
                 int iconID = data.getIntExtra(LensDetailsActivity.EXTRA_USER_ICON_ID, 0);
 
+                // Lens(make, maxAperture, focalLength [mm], iconID)
                 manager.add(new Lens(make, aperture, focalLength, iconID));
                 populateListView();
                 break;
