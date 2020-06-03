@@ -10,7 +10,6 @@
     <string name="ex_canon">ex. Canon</string>
     <string name="ex_200_for_200mm">ex. 200 for 200mm</string>
     <string name="ex_2_8_for_f2_8">ex. 2.8 for F2.8</string>
-    <string name="save">Save</string>
     <string name="add_lens">Add Lens</string>
     <string name="enter_all_values">Enter all values</string>
     <string name="far_focal_distance">Far Focal Distance</string>
@@ -23,7 +22,14 @@
     <string name="selected_aperture">Selected aperture</string>
     <string name="circle_of_confusion_m">Circle of Confusion [mm]</string>
     <string name="distance_to_subject_m">Distance to subject [m]</string>
-    <string name="edit_lens">Edit Lens</string>
-    <string name="delete">Delete</string>
     <string name="icon">Icon</string>
+    <string name="emptyList_text">There are currently no lens\nClick the + to add a new lens</string>
+    <string name="save_icon_button">save icon button</string>
+    <string name="item_view_make">Make</string>
+    <string name="item_view_focal_length">Focal length</string>
+    <string name="item_view_aperture">Aperture</string>
+    <string name="default_icon">Default</string>
+    <string name="dof_activity_title">Calculating for</string>
+    <string name="menu_edit">Edit</string>
+    <string name="menu_delete">Delete</string>
 </resources>

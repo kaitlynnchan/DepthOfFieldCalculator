@@ -114,13 +114,13 @@ public class CalculateDepthOfFieldActivity extends AppCompatActivity {
         TextView nearFocalDistance = findViewById(R.id.txtNearFocalDistance);
         TextView farFocalDistance = findViewById(R.id.txtFarFocalDistance);
         TextView depthOfField = findViewById(R.id.txtDepthOfField);
-        TextView hyperFocalDistance = findViewById(R.id.txtHyperFocalDistance);
+        TextView hyperfocalDistance = findViewById(R.id.txtHyperfocalDistance);
 
         if(userAperture < lens.getMaxAperture()){
             nearFocalDistance.setText(INVALID_APERTURE);
             farFocalDistance.setText(INVALID_APERTURE);
             depthOfField.setText(INVALID_APERTURE);
-            hyperFocalDistance.setText(INVALID_APERTURE);
+            hyperfocalDistance.setText(INVALID_APERTURE);
         } else{
             // depthOfFieldCalculator (lens, aperture, distance [mm], circle of confusion [mm])
             DepthOfFieldCalculator doFCalculator = new DepthOfFieldCalculator(
@@ -129,7 +129,7 @@ public class CalculateDepthOfFieldActivity extends AppCompatActivity {
             // Divide distances by 1000 to convert units from [mm] to [m]
             nearFocalDistance.setText(formatM(doFCalculator.nearFocalPoint() / 1000));
             farFocalDistance.setText(formatM(doFCalculator.farFocalPoint() / 1000));
-            hyperFocalDistance.setText(formatM(doFCalculator.hyperFocalDistance() / 1000));
+            hyperfocalDistance.setText(formatM(doFCalculator.hyperFocalDistance() / 1000));
             depthOfField.setText(formatM(doFCalculator.depthOfField() / 1000));
         }
     }

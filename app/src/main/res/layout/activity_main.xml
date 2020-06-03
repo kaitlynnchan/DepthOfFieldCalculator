@@ -88,7 +88,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
-        android:text="There are currently no lens\nClick the + to add a new lens"
+        android:text="@string/emptyList_text"
         android:textSize="18sp"
         android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"

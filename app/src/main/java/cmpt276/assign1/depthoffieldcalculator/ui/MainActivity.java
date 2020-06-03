@@ -60,8 +60,8 @@ public class MainActivity extends AppCompatActivity {
         populateListView();
         registerClickCallback();
 
-        FloatingActionButton add = findViewById(R.id.buttonAdd);
-        add.setOnClickListener(view -> {
+        FloatingActionButton btnAdd = findViewById(R.id.buttonAdd);
+        btnAdd.setOnClickListener(view -> {
             Intent intent = LensDetailsActivity.makeLaunchIntent(MainActivity.this, false);
             startActivityForResult(intent, RESULT_CODE_ADD_LENS);
         });

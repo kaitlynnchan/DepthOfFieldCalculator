@@ -4,6 +4,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <ImageView
+        android:id="@+id/item_imageViewIcon"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        app:srcCompat="@drawable/icon_no_image2" />
+
     <TextView
         android:id="@+id/item_textViewMake"
         android:layout_width="wrap_content"
@@ -16,7 +22,7 @@
         android:layout_marginBottom="6dp"
         android:layout_toEndOf="@+id/item_imageViewIcon"
         android:layout_toRightOf="@+id/item_imageViewIcon"
-        android:text="Make"
+        android:text="@string/item_view_make"
         android:textSize="24sp" />
 
     <TextView
@@ -31,7 +37,7 @@
         android:layout_marginBottom="0dp"
         android:layout_toEndOf="@+id/item_textViewMake"
         android:layout_toRightOf="@+id/item_textViewMake"
-        android:text="Focal length"
+        android:text="@string/item_view_focal_length"
         android:textSize="24sp" />
 
     <TextView
@@ -46,12 +52,7 @@
         android:layout_marginBottom="0dp"
         android:layout_toEndOf="@+id/item_textViewFocalLength"
         android:layout_toRightOf="@+id/item_textViewFocalLength"
-        android:text="Aperture"
+        android:text="@string/item_view_aperture"
         android:textSize="24sp" />
 
-    <ImageView
-        android:id="@+id/item_imageViewIcon"
-        android:layout_width="45dp"
-        android:layout_height="45dp"
-        app:srcCompat="@drawable/icon_no_image2" />
 </RelativeLayout>
