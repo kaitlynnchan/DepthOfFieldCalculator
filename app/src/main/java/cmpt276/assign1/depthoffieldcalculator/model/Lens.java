@@ -2,12 +2,11 @@ package cmpt276.assign1.depthoffieldcalculator.model;
 
 /**
  * Stores information about a single lens
- * info: make, maximum aperture, focal length
  */
 public class Lens {
     private String make;
     private double maxAperture;
-    private int focalLength;
+    private int focalLength;    // [mm]
     private int iconID;
 
     public Lens(String make, double maxAperture, int focalLength, int iconID){

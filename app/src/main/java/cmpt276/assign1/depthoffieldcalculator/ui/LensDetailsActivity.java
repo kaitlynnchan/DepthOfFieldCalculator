@@ -57,7 +57,7 @@ public class LensDetailsActivity extends AppCompatActivity {
             getSupportActionBar().setTitle("Edit Lens");
 
             String make = intent.getStringExtra(CalculateDepthOfFieldActivity.EXTRA_LENS_MAKE);
-            int focalLength = intent.getIntExtra(CalculateDepthOfFieldActivity.EXTRA_LENS_FOCAL_LENGTH, 0);
+            int focalLength = intent.getIntExtra(CalculateDepthOfFieldActivity.EXTRA_LENS_FOCAL_LENGTH, 0);     // [mm]
             double aperture = intent.getDoubleExtra(CalculateDepthOfFieldActivity.EXTRA_LENS_APERTURE, 0);
             int iconID = intent.getIntExtra(CalculateDepthOfFieldActivity.EXTRA_LENS_ICON_ID, 0);
             currentIconID = iconID;
@@ -84,7 +84,7 @@ public class LensDetailsActivity extends AppCompatActivity {
     private void setupButtonIcons(){
         ImageView icon = findViewById(R.id.imageViewIcon);
         if(currentIconID == 0){
-            currentIconID = R.drawable.ic_add_a_photo_grey_24dp;
+            currentIconID = R.drawable.icon_no_image2;
         }
 
         ImageButton btnIconLensYellow = findViewById(R.id.buttonIconLensYellow);
@@ -115,8 +115,8 @@ public class LensDetailsActivity extends AppCompatActivity {
     private void selectButtonIcon(ImageView icon, int drawableID){
         // Select and deselect icon
         if(currentIconID == drawableID){
-            currentIconID = R.drawable.ic_add_a_photo_grey_24dp;
-            icon.setImageResource(R.drawable.ic_add_a_photo_grey_24dp);
+            currentIconID = R.drawable.icon_no_image2;
+            icon.setImageResource(currentIconID);
         } else{
             icon.setImageResource(drawableID);
             currentIconID = drawableID;
@@ -158,7 +158,7 @@ public class LensDetailsActivity extends AppCompatActivity {
                             .show();
                 } else{
                     int userFocalLength = Integer.parseInt(userFocalLengthData);
-                    double userAperture = Double.parseDouble(userApertureData);
+                    double userAperture = Double.parseDouble(userApertureData);    // [mm]
                     if(currentIconID == R.drawable.ic_add_a_photo_grey_24dp){
                         currentIconID = R.drawable.icon_no_image;
                     }

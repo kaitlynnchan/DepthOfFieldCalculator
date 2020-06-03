@@ -99,11 +99,11 @@ public class CalculateDepthOfFieldActivity extends AppCompatActivity {
                         && !userDistanceData.isEmpty()
                         && !userApertureData.isEmpty())
                 {
-                    double userCOC = Double.parseDouble(userCOCData);
-                    double userDistance = Double.parseDouble(userDistanceData);
+                    double userCOC = Double.parseDouble(userCOCData);              // [mm]
+                    double userDistance = Double.parseDouble(userDistanceData);    // [m]
                     double userAperture = Double.parseDouble(userApertureData);
 
-                    // Multiply userDistance by 1000 to convert units from m to mm
+                    // Multiply userDistance by 1000 to convert units from [m] to [mm]
                     calculateDepthOfField(userCOC, userDistance * 1000, userAperture);
                 }
             }
@@ -129,7 +129,7 @@ public class CalculateDepthOfFieldActivity extends AppCompatActivity {
             DepthOfFieldCalculator doFCalculator = new DepthOfFieldCalculator(
                     lens, userAperture, userDistance, userCOC);
 
-            // Divide distances by 1000 to convert units from mm to m
+            // Divide distances by 1000 to convert units from [mm] to [m]
             nearFocalDistance.setText(formatM(doFCalculator.nearFocalPoint() / 1000));
             farFocalDistance.setText(formatM(doFCalculator.farFocalPoint() / 1000));
             hyperFocalDistance.setText(formatM(doFCalculator.hyperFocalDistance() / 1000));
@@ -157,7 +157,7 @@ public class CalculateDepthOfFieldActivity extends AppCompatActivity {
         switch (requestCode){
             case RESULT_CODE_EDIT_LENS:
                 String userMake = data.getStringExtra(LensDetailsActivity.EXTRA_USER_MAKE);
-                int userFocalLength = data.getIntExtra(LensDetailsActivity.EXTRA_USER_FOCAL_lENGTH, 0);
+                int userFocalLength = data.getIntExtra(LensDetailsActivity.EXTRA_USER_FOCAL_lENGTH, 0);    // [mm]
                 double userAperture = data.getDoubleExtra(LensDetailsActivity.EXTRA_USER_APERTURE, 0);
                 int userIconID = data.getIntExtra(LensDetailsActivity.EXTRA_USER_ICON_ID, 0);
 

@@ -6,8 +6,8 @@ package cmpt276.assign1.depthoffieldcalculator.model;
 public class DepthOfFieldCalculator {
     private Lens lens;
     private double aperture;
-    private double distance;
-    private double COC;
+    private double distance;    // [mm]
+    private double COC;         // [mm]
 
     public DepthOfFieldCalculator(Lens lens, double aperture, double distance, double COC) {
         this.lens = lens;
@@ -40,10 +40,4 @@ public class DepthOfFieldCalculator {
         return farFocalPoint() - nearFocalPoint();
     }
 
-//    @Override
-//    public String toString() {
-//        return "\tIn focus: " + nearFocalPoint() + "m to " + farFocalPoint()
-//                + "m [DoF = " + depthOfField() + "m]"
-//                + "\n\tHyperfocal point: " + hyperFocalDistance() + "m";
-//    }
 }

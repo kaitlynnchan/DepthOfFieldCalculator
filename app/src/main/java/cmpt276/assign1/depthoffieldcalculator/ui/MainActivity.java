@@ -118,7 +118,7 @@ public class MainActivity extends AppCompatActivity {
             TextView makeText = itemView.findViewById(R.id.item_textViewMake);
             makeText.setText(currentLens.getMake());
 
-            TextView focalLengthText = itemView.findViewById(R.id.item_textViewFocalLength);
+            TextView focalLengthText = itemView.findViewById(R.id.item_textViewFocalLength);    // [mm]
             focalLengthText.setText(currentLens.getFocalLength() + "mm");
 
             TextView apertureText = itemView.findViewById(R.id.item_textViewAperture);
@@ -182,7 +182,7 @@ public class MainActivity extends AppCompatActivity {
                         .show();
 
                 String make = data.getStringExtra(LensDetailsActivity.EXTRA_USER_MAKE);
-                int focalLength = data.getIntExtra(LensDetailsActivity.EXTRA_USER_FOCAL_lENGTH, 0);
+                int focalLength = data.getIntExtra(LensDetailsActivity.EXTRA_USER_FOCAL_lENGTH, 0);    // [mm]
                 double aperture = data.getDoubleExtra(LensDetailsActivity.EXTRA_USER_APERTURE, 0);
                 int iconID = data.getIntExtra(LensDetailsActivity.EXTRA_USER_ICON_ID, 0);
 
