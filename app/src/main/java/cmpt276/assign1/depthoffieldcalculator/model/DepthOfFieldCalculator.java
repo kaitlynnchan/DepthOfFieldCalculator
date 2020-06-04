@@ -16,23 +16,23 @@ public class DepthOfFieldCalculator {
         this.COC = COC;
     }
 
-    public double hyperFocalDistance(){
+    public double hyperfocalDistance(){
         return (lens.getFocalLength() * lens.getFocalLength()) / (aperture * COC);
     }
 
     public double nearFocalPoint(){
-        double hyperFocalDistance = hyperFocalDistance();
-        return (hyperFocalDistance * distance)
-                / (hyperFocalDistance + (distance - COC));
+        double hyperfocalDistance = hyperfocalDistance();
+        return (hyperfocalDistance * distance)
+                / (hyperfocalDistance + (distance - COC));
     }
 
     public double farFocalPoint(){
-        double hyperFocalDistance = hyperFocalDistance();
-        if(distance > hyperFocalDistance){
+        double hyperfocalDistance = hyperfocalDistance();
+        if(distance > hyperfocalDistance){
             return Double.POSITIVE_INFINITY;
         } else{
-            return (hyperFocalDistance * distance)
-                    / (hyperFocalDistance - (distance - lens.getFocalLength()));
+            return (hyperfocalDistance * distance)
+                    / (hyperfocalDistance - (distance - lens.getFocalLength()));
         }
     }
 

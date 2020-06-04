@@ -37,6 +37,7 @@ public class CalculateDepthOfFieldActivity extends AppCompatActivity {
 
     private static final String EXTRA_LENS_INDEX = "lens index";
     private static final String INVALID_APERTURE = "Invalid aperture";
+    private static final String INVALID_VALUES = "Enter values greater than 0";
     private LensManager manager;
     private Lens lens;
     private TextView lensText;
@@ -121,6 +122,11 @@ public class CalculateDepthOfFieldActivity extends AppCompatActivity {
             farFocalDistance.setText(INVALID_APERTURE);
             depthOfField.setText(INVALID_APERTURE);
             hyperfocalDistance.setText(INVALID_APERTURE);
+        } else if(userCOC <= 0 || userDistance <= 0){
+            nearFocalDistance.setText(INVALID_VALUES);
+            farFocalDistance.setText(INVALID_VALUES);
+            depthOfField.setText(INVALID_VALUES);
+            hyperfocalDistance.setText(INVALID_VALUES);
         } else{
             // depthOfFieldCalculator (lens, aperture, distance [mm], circle of confusion [mm])
             DepthOfFieldCalculator doFCalculator = new DepthOfFieldCalculator(
@@ -129,7 +135,7 @@ public class CalculateDepthOfFieldActivity extends AppCompatActivity {
             // Divide distances by 1000 to convert units from [mm] to [m]
             nearFocalDistance.setText(formatM(doFCalculator.nearFocalPoint() / 1000));
             farFocalDistance.setText(formatM(doFCalculator.farFocalPoint() / 1000));
-            hyperfocalDistance.setText(formatM(doFCalculator.hyperFocalDistance() / 1000));
+            hyperfocalDistance.setText(formatM(doFCalculator.hyperfocalDistance() / 1000));
             depthOfField.setText(formatM(doFCalculator.depthOfField() / 1000));
         }
     }

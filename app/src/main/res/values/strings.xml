@@ -23,7 +23,7 @@
     <string name="circle_of_confusion_m">Circle of Confusion [mm]</string>
     <string name="distance_to_subject_m">Distance to subject [m]</string>
     <string name="icon">Icon</string>
-    <string name="emptyList_text">There are currently no lens\nClick the + to add a new lens</string>
+    <string name="emptyList_text">Click the + to add a new lens</string>
     <string name="save_icon_button">save icon button</string>
     <string name="item_view_make">Make</string>
     <string name="item_view_focal_length">Focal length</string>

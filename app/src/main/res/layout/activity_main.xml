@@ -62,7 +62,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Optional features:\n
-2. Edit and Delete Lens         7. Empty State\n
+2. Edit and Delete Lens: access through calculate activity\n
+7. Empty State\n
 3. Error Checking Input         1. App Bar Buttons\n
 4. Auto-reccalculate              5. Save Data\n
 6. Lens Icons"
@@ -76,12 +77,12 @@
         android:id="@+id/emptyList_imageArrow"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:visibility="invisible"
+        android:visibility="visible"
         app:layout_constraintBottom_toTopOf="@+id/buttonAdd"
         app:layout_constraintEnd_toEndOf="@+id/buttonAdd"
         app:layout_constraintStart_toStartOf="@+id/emptyList_text1"
         app:layout_constraintTop_toBottomOf="@+id/emptyList_text1"
-        app:srcCompat="@drawable/arrow_drawn" />
+        app:srcCompat="@drawable/arrow_drawn_grey" />
 
     <TextView
         android:id="@+id/emptyList_text1"
@@ -89,11 +90,37 @@
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
         android:text="@string/emptyList_text"
+        android:textColor="#B0B0B1"
+        android:textColorHint="#FFFFFF"
         android:textSize="18sp"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:visibility="visible"
+        app:layout_constraintEnd_toEndOf="@+id/textView"
+        app:layout_constraintStart_toStartOf="@+id/textView"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="0dp"
+        android:layout_height="@android:dimen/notification_large_icon_width"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/textView"
+        app:layout_constraintEnd_toEndOf="@+id/textView"
+        app:layout_constraintStart_toStartOf="@+id/textView"
+        app:srcCompat="@drawable/ic_error_grey_24dp"
+        tools:ignore="VectorDrawableCompat" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:text="There are currently no lens"
+        android:textColor="#B0B0B1"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/guidelineLower"
+        app:layout_constraintEnd_toEndOf="@+id/listViewLens"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="@+id/listViewLens" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
