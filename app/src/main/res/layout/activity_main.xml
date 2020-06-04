@@ -90,7 +90,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
-        android:text="There are currently no lens!"
+        android:text="@string/emptyList_text_title"
         android:textColor="#B0B0B1"
         android:textSize="20sp"
         android:textStyle="bold"

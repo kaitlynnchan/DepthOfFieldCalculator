@@ -82,7 +82,7 @@ public class LensDetailsActivity extends AppCompatActivity {
     private void setupButtonIcons(){
         ImageView icon = findViewById(R.id.imageViewIcon);
         if(currentIconID == 0){
-            currentIconID = R.drawable.icon_no_image2;
+            currentIconID = R.drawable.icon_no_icon;
         }
 
         ImageButton btnIconLensYellow = findViewById(R.id.buttonIconLensYellow);
@@ -113,7 +113,7 @@ public class LensDetailsActivity extends AppCompatActivity {
     private void selectButtonIcon(ImageView icon, int drawableID){
         // Select and deselect icon
         if(currentIconID == drawableID){
-            currentIconID = R.drawable.icon_no_image2;
+            currentIconID = R.drawable.icon_no_icon;
             icon.setImageResource(currentIconID);
         } else{
             icon.setImageResource(drawableID);
@@ -158,7 +158,7 @@ public class LensDetailsActivity extends AppCompatActivity {
                     int userFocalLength = Integer.parseInt(userFocalLengthData);    // [mm]
                     double userAperture = Double.parseDouble(userApertureData);
                     // Insure that the lens' icon has a proper image
-                    if(currentIconID == R.drawable.icon_no_image2){
+                    if(currentIconID == R.drawable.icon_no_icon){
                         currentIconID = R.drawable.icon_no_image;
                     }
 

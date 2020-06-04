@@ -22,7 +22,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar"
-        app:srcCompat="@drawable/icon_no_image2"
+        app:srcCompat="@drawable/icon_no_icon"
         tools:ignore="VectorDrawableCompat" />
 
     <androidx.constraintlayout.widget.Guideline

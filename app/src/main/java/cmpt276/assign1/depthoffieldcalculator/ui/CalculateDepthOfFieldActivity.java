@@ -40,7 +40,7 @@ public class CalculateDepthOfFieldActivity extends AppCompatActivity {
     private static final String INVALID_VALUES = "Enter values greater than 0";
     private LensManager manager;
     private Lens lens;
-    private TextView lensText;
+    private TextView textLens;
 
     public static Intent makeLaunchIntent(Context context, int lensIdx){
         Intent intent = new Intent(context, CalculateDepthOfFieldActivity.class);
@@ -64,8 +64,8 @@ public class CalculateDepthOfFieldActivity extends AppCompatActivity {
         manager = LensManager.getInstance();
         lens = manager.get(lensIndex);
 
-        lensText = findViewById(R.id.textViewLens);
-        lensText.setText(lens.toString());
+        textLens = findViewById(R.id.textViewLens);
+        textLens.setText(lens.toString());
 
         setupAutoCalculate();
     }
@@ -177,7 +177,7 @@ public class CalculateDepthOfFieldActivity extends AppCompatActivity {
                     lens.setIconID(userIconID);
                 }
 
-                lensText.setText(lens.toString());
+                textLens.setText(lens.toString());
                 break;
             default:
                 assert false;
