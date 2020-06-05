@@ -144,19 +144,16 @@ public class MainActivity extends AppCompatActivity {
     private void setupEmptyListView(ListView list) {
         TextView textTitle = findViewById(R.id.emptyList_textTitle);
         TextView text1 = findViewById(R.id.emptyList_text1);
-        ImageView arrow = findViewById(R.id.emptyList_imageArrow);
         ImageView error = findViewById(R.id.emptyList_imageError);
         if(manager.getSize() <= 0){
             list.setVisibility(View.INVISIBLE);
             textTitle.setVisibility(View.VISIBLE);
             text1.setVisibility(View.VISIBLE);
-            arrow.setVisibility(View.VISIBLE);
             error.setVisibility(View.VISIBLE);
         } else{
             list.setVisibility(View.VISIBLE);
             textTitle.setVisibility(View.INVISIBLE);
             text1.setVisibility(View.INVISIBLE);
-            arrow.setVisibility(View.INVISIBLE);
             error.setVisibility(View.INVISIBLE);
         }
     }

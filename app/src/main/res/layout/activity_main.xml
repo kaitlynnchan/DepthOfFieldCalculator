@@ -53,7 +53,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewSelect"
-        app:layout_constraintVertical_bias="1.0">
+        app:layout_constraintVertical_bias="0.0">
 
     </ListView>
 
@@ -62,12 +62,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Optional features:\n
-2. Edit and Delete Lens: access through calculate activity\n
-3. Error Checking Input         7. Empty State\n
-4. Auto-reccalculate              1. App Bar Buttons\n
-6. Lens Icons                           5. Save Data"
-
-
+2. Edit and Delete Lens         7. Empty State\n
+3. Error Checking Input         1. App Bar Buttons\n
+4. Auto-reccalculate              5. Save Data\n
+6. Lens Icons"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guidelineLower"
@@ -78,7 +76,7 @@
         android:layout_width="0dp"
         android:layout_height="@android:dimen/notification_large_icon_width"
         android:layout_marginBottom="8dp"
-        android:visibility="invisible"
+        android:visibility="visible"
         app:layout_constraintBottom_toTopOf="@+id/emptyList_textTitle"
         app:layout_constraintEnd_toEndOf="@+id/emptyList_textTitle"
         app:layout_constraintStart_toStartOf="@+id/emptyList_textTitle"
@@ -94,7 +92,7 @@
         android:textColor="#B0B0B1"
         android:textSize="20sp"
         android:textStyle="bold"
-        android:visibility="invisible"
+        android:visibility="visible"
         app:layout_constraintBottom_toTopOf="@+id/guidelineLower"
         app:layout_constraintEnd_toEndOf="@+id/listViewLens"
         app:layout_constraintStart_toStartOf="parent"
@@ -102,27 +100,21 @@
 
     <TextView
         android:id="@+id/emptyList_text1"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
         android:gravity="center_horizontal"
         android:text="@string/emptyList_text"
         android:textColor="#B0B0B1"
         android:textColorHint="#FFFFFF"
         android:textSize="18sp"
-        android:visibility="invisible"
-        app:layout_constraintEnd_toEndOf="@+id/emptyList_textTitle"
-        app:layout_constraintStart_toStartOf="@+id/emptyList_textTitle"
+        android:visibility="visible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/emptyList_textTitle" />
-
-    <ImageView
-        android:id="@+id/emptyList_imageArrow"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toTopOf="@+id/buttonAdd"
-        app:layout_constraintEnd_toEndOf="@+id/buttonAdd"
-        app:layout_constraintStart_toStartOf="@+id/emptyList_text1"
-        app:layout_constraintTop_toBottomOf="@+id/emptyList_text1"
-        app:srcCompat="@drawable/arrow_drawn_grey" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

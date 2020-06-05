@@ -24,7 +24,8 @@
     <string name="distance_to_subject_m">Distance to subject [m]</string>
     <string name="icon">Icon</string>
     <string name="emptyList_text_title">There are currently no lens!</string>
-    <string name="emptyList_text">Click the + to add a new lens</string>
+    <string name="emptyList_text">Add a new lens by clicking the + below then enter the make, aperture, and focal length and don\'t forget to choose an icon.
+        Once your done click the save button and the new lens will show up here. </string>
     <string name="save_icon_button">save icon button</string>
     <string name="item_view_make">Make</string>
     <string name="item_view_focal_length">Focal length</string>
