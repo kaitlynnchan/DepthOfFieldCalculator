@@ -20,6 +20,8 @@ import cmpt276.assign1.depthoffieldcalculator.R;
  * Allows user to input make, focal length, max aperture, and icon
  * User can add or edit lens
  * Sets a default icon if user does not choose one
+ *
+ * Got help with actionbar menu from: https://www.youtube.com/watch?v=5MSKuVO2hV4
  */
 public class LensDetailsActivity extends AppCompatActivity {
 

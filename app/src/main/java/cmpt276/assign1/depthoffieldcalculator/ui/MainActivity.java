@@ -35,6 +35,8 @@ import cmpt276.assign1.depthoffieldcalculator.model.LensManager;
  * Displays lens in a list View
  * Allows user to add lens by the floating action button
  * User can click the a lens to launch calculate activity
+ *
+ * Got help with toolbar from: https://stackoverflow.com/questions/26651602/display-back-arrow-on-toolbar
  */
 public class MainActivity extends AppCompatActivity {
 
@@ -86,7 +88,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void populateLensManager(){
-        // Lens(make, maxAperture, focalLength [mm], iconID)
+        // Lens (make, maxAperture, focalLength [mm], iconID)
         manager.add(new Lens("Canon", 1.8, 50, R.drawable.icon_picture));
         manager.add(new Lens("Tamron", 2.8, 90, R.drawable.icon_picture));
         manager.add(new Lens("Sigma", 2.8, 200, R.drawable.icon_picture));
@@ -134,7 +136,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void saveSharedPreferences(){
-        // Code taken from: https://codinginflow.com/tutorials/android/save-arraylist-to-sharedpreferences-with-gson
+        // Got help for code from: https://codinginflow.com/tutorials/android/save-arraylist-to-sharedpreferences-with-gson
         SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFERENCE, MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         Gson gson = new Gson();

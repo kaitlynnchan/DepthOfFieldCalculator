@@ -26,6 +26,8 @@ import cmpt276.assign1.depthoffieldcalculator.model.LensManager;
  * Compute depth of field values for the selected Lens
  * Allows user to input circle of confusion, distance, and aperture
  * User can edit and delete selected lens
+ *
+ * Got help with actionbar menu from: https://www.youtube.com/watch?v=5MSKuVO2hV4
  */
 public class CalculateDepthOfFieldActivity extends AppCompatActivity {
 
