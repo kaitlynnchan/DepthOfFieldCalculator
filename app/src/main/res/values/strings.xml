@@ -17,7 +17,7 @@
     <string name="hyperfocal_distance">Hyperfocal Distance</string>
     <string name="depth_of_field">Depth of Field</string>
     <string name="_0_029">0.029</string>
-    <string name="lens">Lens</string>
+    <string name="lens">Lens info</string>
     <string name="ex_1_5_for_1_5m">ex: 1.5 for 1.5m</string>
     <string name="selected_aperture">Selected aperture</string>
     <string name="circle_of_confusion_m">Circle of Confusion [mm]</string>
@@ -31,7 +31,7 @@
     <string name="item_view_focal_length">Focal length</string>
     <string name="item_view_aperture">Aperture</string>
     <string name="default_icon">Default</string>
-    <string name="dof_activity_title">Calculating for</string>
+    <string name="dof_activity_title">Photo details with</string>
     <string name="menu_edit">Edit</string>
     <string name="menu_delete">Delete</string>
 </resources>

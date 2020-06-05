@@ -37,7 +37,7 @@ public class CalculateDepthOfFieldActivity extends AppCompatActivity {
 
     private static final String EXTRA_LENS_INDEX = "lens index";
     private static final String INVALID_APERTURE = "Invalid aperture";
-    private static final String INVALID_VALUES = "Enter values greater than 0";
+    private static final String INVALID_VALUES = "Enter values greater than zero";
     private LensManager manager;
     private Lens lens;
     private TextView textLens;

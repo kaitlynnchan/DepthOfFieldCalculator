@@ -180,11 +180,6 @@ public class MainActivity extends AppCompatActivity {
 
         switch (requestCode){
             case RESULT_CODE_ADD_LENS:
-                Snackbar.make(findViewById(R.id.myMainActivity),
-                        "Added new lens",
-                        Snackbar.LENGTH_SHORT)
-                        .show();
-
                 String make = data.getStringExtra(LensDetailsActivity.EXTRA_USER_MAKE);
                 int focalLength = data.getIntExtra(LensDetailsActivity.EXTRA_USER_FOCAL_LENGTH, 0);    // [mm]
                 double aperture = data.getDoubleExtra(LensDetailsActivity.EXTRA_USER_APERTURE, 0);
