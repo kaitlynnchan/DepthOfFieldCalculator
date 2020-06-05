@@ -17,8 +17,8 @@ import android.widget.Toast;
 import cmpt276.assign1.depthoffieldcalculator.R;
 
 /**
- * Displays and allows user to input make, focal length, aperture of lens, and icon
- * Able to add or edit lens
+ * Allows user to input make, focal length, max aperture, and icon
+ * User can add or edit lens
  * Sets a default icon if user does not choose one
  */
 public class LensDetailsActivity extends AppCompatActivity {
@@ -44,7 +44,7 @@ public class LensDetailsActivity extends AppCompatActivity {
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("Create Lens");
+        getSupportActionBar().setTitle("Add Lens");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
@@ -184,6 +184,14 @@ public class LensDetailsActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent();
+        setResult(Activity.RESULT_CANCELED, intent);
+        finish();
+        super.onBackPressed();
     }
 
 }

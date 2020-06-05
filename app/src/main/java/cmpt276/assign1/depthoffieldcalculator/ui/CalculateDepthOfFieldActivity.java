@@ -25,7 +25,7 @@ import cmpt276.assign1.depthoffieldcalculator.model.LensManager;
 /**
  * Compute depth of field values for the selected Lens
  * Allows user to input circle of confusion, distance, and aperture
- * Able to edit and delete selected lens
+ * User can edit and delete selected lens
  */
 public class CalculateDepthOfFieldActivity extends AppCompatActivity {
 
@@ -229,4 +229,5 @@ public class CalculateDepthOfFieldActivity extends AppCompatActivity {
         finish();
         super.onBackPressed();
     }
+
 }

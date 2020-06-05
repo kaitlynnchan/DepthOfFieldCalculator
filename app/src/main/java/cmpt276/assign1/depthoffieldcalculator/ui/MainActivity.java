@@ -20,7 +20,6 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -34,8 +33,8 @@ import cmpt276.assign1.depthoffieldcalculator.model.LensManager;
 /**
  * Launch Activity
  * Displays lens in a list View
- * Can add lens by the floating action button
- * Can click the lens in list
+ * Allows user to add lens by the floating action button
+ * User can click the a lens to launch calculate activity
  */
 public class MainActivity extends AppCompatActivity {
 
@@ -61,9 +60,12 @@ public class MainActivity extends AppCompatActivity {
         registerClickCallback();
 
         FloatingActionButton btnAdd = findViewById(R.id.buttonAdd);
-        btnAdd.setOnClickListener(view -> {
-            Intent intent = LensDetailsActivity.makeLaunchIntent(MainActivity.this, false);
-            startActivityForResult(intent, RESULT_CODE_ADD_LENS);
+        btnAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = LensDetailsActivity.makeLaunchIntent(MainActivity.this, false);
+                MainActivity.this.startActivityForResult(intent, RESULT_CODE_ADD_LENS);
+            }
         });
 
     }
