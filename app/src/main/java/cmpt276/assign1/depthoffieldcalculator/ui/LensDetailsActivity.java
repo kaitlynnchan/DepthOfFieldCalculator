@@ -169,6 +169,11 @@ public class LensDetailsActivity extends AppCompatActivity {
                                 "Aperture cannot be less than 1.4",
                                 Toast.LENGTH_LONG)
                                 .show();
+                    } else if (userFocalLength <= 0){
+                        Toast.makeText(LensDetailsActivity.this,
+                                "Distance must be greater than 0",
+                                Toast.LENGTH_SHORT)
+                                .show();
                     } else{
                         intent.putExtra(EXTRA_USER_MAKE, userMake);
                         intent.putExtra(EXTRA_USER_FOCAL_LENGTH, userFocalLength);
@@ -177,6 +182,7 @@ public class LensDetailsActivity extends AppCompatActivity {
 
                         setResult(Activity.RESULT_OK, intent);
                         finish();
+
                     }
                 }
                 break;
