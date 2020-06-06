@@ -171,7 +171,7 @@ public class LensDetailsActivity extends AppCompatActivity {
                                 .show();
                     } else if (userFocalLength <= 0){
                         Toast.makeText(LensDetailsActivity.this,
-                                "Distance must be greater than 0",
+                                "Focal length must be greater than 0",
                                 Toast.LENGTH_SHORT)
                                 .show();
                     } else{
